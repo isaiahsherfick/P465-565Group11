@@ -10,8 +10,8 @@ Checkout the repo.
 For example:
 
 ```
-git clone https://github.com/airavata-courses/CAPtivate.git
-cd CAPtivate
+https://github.com/isaiahsherfick/P465-565Group11.git
+cd P465-565Group11
 ```
 
 Create a branch with the following naming convention depending on the type of your task
