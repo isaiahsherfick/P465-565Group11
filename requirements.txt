@@ -1,5 +1,4 @@
 appdirs==1.4.4
-arandr==0.1.10
 attrs==20.2.0
 btrfsutil==1.2.0
 CacheControl==0.12.6
