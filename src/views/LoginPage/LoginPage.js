@@ -1,4 +1,5 @@
-import React from "react";
+import React,{useState} from "react";
+import axios from 'axios';
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import InputAdornment from "@material-ui/core/InputAdornment";
@@ -33,6 +34,30 @@ export default function LoginPage(props) {
   }, 700);
   const classes = useStyles();
   const { ...rest } = props;
+  //const username = useFormInput('');
+  const pass = useFormInput('');
+  const first = useFormInput('');
+  const email = useFormInput('');
+  const [error, setError] = useState(null);
+
+  const handleLogin = () => {
+    setError(null);
+    //setUsername(username.value)
+    axios.post('http://localhost:5000/users/register/', 
+    { 
+      name: first.value, 
+      email: email.value, 
+      password: pass.value 
+    }).then(response => {
+      if(response.data.sucess){return(alert("Sucessfully Registered. Please signin back!"));}
+      props.history.push('/MapPage');
+    }).catch(error => {
+      if (error.response.status === 401) setError(error.response.data.message);
+      else setError("Something went wrong. Please try again later.");
+    });
+  }
+
+
   return (
     <div>
       <div className="iframe">
@@ -52,7 +77,7 @@ export default function LoginPage(props) {
           <GridContainer justify="center">
             <GridItem xs={12} sm={12} md={4}>
               <Card className={classes[cardAnimaton]}>
-                <form className={classes.form}>
+                <form className={classes.form} >
                   <CardHeader color="primary" className={classes.cardHeader}>
                     <h4>Login</h4>
                     <div className={classes.socialLine}>
@@ -90,6 +115,7 @@ export default function LoginPage(props) {
                     <CustomInput
                       labelText="First Name..."
                       id="first"
+                      name="first"
                       formControlProps={{
                         fullWidth: true
                       }}
@@ -105,6 +131,7 @@ export default function LoginPage(props) {
                     <CustomInput
                       labelText="Email..."
                       id="email"
+                      name="email"
                       formControlProps={{
                         fullWidth: true
                       }}
@@ -120,6 +147,7 @@ export default function LoginPage(props) {
                     <CustomInput
                       labelText="Password"
                       id="pass"
+                      name="pass"
                       formControlProps={{
                         fullWidth: true
                       }}
@@ -137,7 +165,7 @@ export default function LoginPage(props) {
                     />
                   </CardBody>
                   <CardFooter className={classes.cardFooter}>
-                    <Button simple color="primary" size="lg">
+                    <Button simple color="primary" size="lg" onClick={handleLogin}>
                       Get started
                     </Button>
                   </CardFooter>
@@ -150,4 +178,17 @@ export default function LoginPage(props) {
       </div>
     </div>
   );
+  
+}
+
+const useFormInput = initialValue => {
+  const [value, setValue] = useState(initialValue);
+
+  const handleChange = e => {
+    setValue(e.target.value);
+  }
+  return {
+    value,
+    onChange: handleChange
+  }
 }
