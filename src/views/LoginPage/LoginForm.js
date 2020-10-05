@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState} from "react";
 import axios from 'axios';
 // material-ui components
 import InputAdornment from "@material-ui/core/InputAdornment";
@@ -13,14 +13,20 @@ import CustomInput from "components/CustomInput/CustomInput.js";
 import CardFooter from "components/Card/CardFooter";
 import Email from "@material-ui/icons/Email";
 import People from "@material-ui/icons/People";
-import {Link} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 
 import GridContainer from "../../components/Grid/GridContainer";
 import GridItem from "../../components/Grid/GridItem";
 import styles from "assets/jss/material-kit-react/views/loginPage.js";
 
+import FacebookLogin from 'react-facebook-login';
+
+import GoogleLogin from 'react-google-login';
+
 const useStyles = makeStyles(styles);
 //const classes = useStyles();
+//const history = useHistory();
+//const[isAutheticated, setisAutheticated] = useState(false);
 
 export default class SignupButton extends React.Component {
   
@@ -61,10 +67,14 @@ export default class SignupButton extends React.Component {
       email: this.state.email, 
       password: this.state.password
     }).then(response => {
-     
+      //setisAutheticated(true);
+      //console.log("loggedInUser:" + isAutheticated)
       //setUserSession(response.data.token, response.data.user);
-      //if(response.result.email){return(alert("Sucessfully Registered. Please signin back!"));}
-      this.props.history.push('/map-page');
+      //console.log(response.result)
+      //if(response.result){
+        alert("Sucessfully Registered. Please signin back!")
+        //this.props.history.push('/map-page');
+      //}
       //return(alert("Sucessfully Registered. Please signin back!"));
 
       
@@ -75,8 +85,40 @@ export default class SignupButton extends React.Component {
     });
   }
 
+  // handlefacbookSubmit = () =>{
+  //   //event.preventDefault();
+  
+  //   try {
+  //     //userHasAuthenticated(true);
+  //     if (getToken()) {
+  //       this.props.history.push('/map-page');
+  //     }
+  //   } catch (e) {
+  //     alert(e.message);
+  //   }
+  // }
+
 
   render() {
+
+    const responseFacebook = (response) => {
+      console.log(response);
+      //setUserSession(response.accessToken, response.email);
+      //this.handlefacbookSubmit
+      try {
+        //userHasAuthenticated(true);
+        if (response.accessToken) {
+          this.props.history.push('/map-page');
+        }
+      } catch (e) {
+        alert(e.message);
+      }
+    }
+
+    const responseGoogle = (response) => {
+      console.log(response);
+    }
+
     return (
       <form className={useStyles.form} style={{textAlign: 'center'}} >
 <CardHeader color="primary"  className={useStyles.cardHeader} >
@@ -91,6 +133,23 @@ export default class SignupButton extends React.Component {
     >
       <i className={"fab fa-twitter"} />
     </Button>
+    <Link to="/map-page">
+    <FacebookLogin
+        appId="350321539653216" //APP ID NOT CREATED YET
+        fields="name,email,picture"
+        callback={responseFacebook}
+      />
+      </Link>
+      <br />
+      <br />
+
+
+      <GoogleLogin
+        clientId="" //CLIENTID NOT CREATED YET
+        buttonText="LOGIN WITH GOOGLE"
+        onSuccess={responseGoogle}
+        onFailure={responseGoogle}
+      />
     <Button
       justIcon
       href="#pablo"
@@ -165,13 +224,13 @@ export default class SignupButton extends React.Component {
     }}
   />
 </CardBody>
+<Link to='/map-page'>
 <CardFooter className={useStyles.cardFooter} style={{justifyContent: 'center'}}>
-<Link to="/map-page">
   <Button simple color="primary" size="lg" onClick={this.handleLogin}>
     Get started
   </Button>
-  </Link>
 </CardFooter>
+</Link>
 </form>
     );
   }
