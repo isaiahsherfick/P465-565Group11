@@ -83,29 +83,32 @@ db = SQLAlchemy( app )
 #CORS(app)
 @app.route( '/' , methods = [ 'GET' , 'POST' ] )
 def index(  ) :
+#     if request.method == 'POST' :
+#         form = request.form
+#         nm = form[ 'name' ]
+#         unm = form[ 'username' ]
+#         # pw = form[ 'password' ]
+#         # age = form[ 'age' ]
+#         ids = len( connection.execute( 'SELECT * FROM users;' ).fetchall( ) )
+#         # connection.execute( 'INSERT INTO users(id,name,username) VALUES(1, name,username);' , ( name0 , username0 ) )
+#         connection.execute( "INSERT INTO users(id,name,username,password) VALUES(%s,%s,%s,%s)" , ( ids+1 , nm , unm , "Pass@1" ) )
+#         # connection.execute('INSERT INTO users(id,name,username) VALUES(1,'Isaiah','Sherfick');')
+#         # connection.commit( )
+#         # db.connection.commit( )
+#         return "success"
+#     return app.send_static_file('index.html')
+
     if request.method == 'POST' :
         form = request.form
-        nm = form[ 'name' ]
-        unm = form[ 'username' ]
-        # pw = form[ 'password' ]
-        # age = form[ 'age' ]
+        first_name = form[ 'name' ]
+        email = form[ 'email' ]
+        #password = bcrypt.generate_password_hash(request.get_json()['password']).decode('utf-8')
+        created = datetime.utcnow()
         ids = len( connection.execute( 'SELECT * FROM users;' ).fetchall( ) )
-        # connection.execute( 'INSERT INTO users(id,name,username) VALUES(1, name,username);' , ( name0 , username0 ) )
-        connection.execute( "INSERT INTO users(id,name,username,password) VALUES(%s,%s,%s,%s)" , ( ids+1 , nm , unm , "Pass@1" ) )
-        # connection.execute('INSERT INTO users(id,name,username) VALUES(1,'Isaiah','Sherfick');')
-        # connection.commit( )
-        # db.connection.commit( )
-        return "success"
+        connection.execute( 'INSERT INTO users(id,name,username,password) VALUES(%s,%s,%s,%s);' , ( ids+1, first_name,email,"Pass@1" ) )
+        result = {'email': email + ' registered'}
+        return jsonify({'result' : result})
     return app.send_static_file('index.html')
-
-#     first_name = request.get_json()['name']
-#     email = request.get_json()['email']
-#     #password = bcrypt.generate_password_hash(request.get_json()['password']).decode('utf-8')
-#     created = datetime.utcnow()
-#     ids = len( connection.execute( 'SELECT * FROM users;' ).fetchall( ) )
-#     connection.execute( 'INSERT INTO users(id,name,username,password) VALUES(%s,%s,%s,%s);' , ( ids+1, first_name,email,"Pass@1" ) )
-#     result = {'email': email + ' registered'}
-#     return jsonify({'result' : result})
 
 @app.route( '/employees' )
 def employees( ) :
