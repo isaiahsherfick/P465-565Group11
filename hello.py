@@ -80,7 +80,7 @@ db = SQLAlchemy( app )
 #     return render_template( 'index.html' )#, fruits = fruits )
 #     # redirect the homepage to the about page
 #     #  return redirect( url_for( 'about' ) )
-#CORS(app)
+CORS(app)
 @app.route( '/' , methods = [ 'GET' , 'POST' ] )
 def index(  ) :
     if request.method == 'POST' :
