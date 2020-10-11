@@ -108,6 +108,7 @@ def index(  ) :
         ids = len( connection.execute( 'SELECT * FROM users;' ).fetchall( ) )
         connection.execute( 'INSERT INTO users(id,name,username,password) VALUES(%s,%s,%s,%s);' , ( ids+1, first_name,email,"Pass@1" ) )
         result = {'email': email + ' registered'}
+        print( "Success" )
         return jsonify({'result' : result})
     return app.send_static_file('index.html')
 
