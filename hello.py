@@ -100,8 +100,8 @@ def index(  ) :
 
     if request.method == 'POST' :
         form = request.form
-        first_name = request.get_json( force = True )['name']
-        email = request.get_json( force = True )['email']
+        first_name = firm.get( 'name' )#request.get_json( force = True )['name']
+        email = form.get( 'email' )#request.get_json( force = True )['email']
         #password = bcrypt.generate_password_hash(request.get_json()['password']).decode('utf-8')
         created = datetime.utcnow()
         ids = len( connection.execute( 'SELECT * FROM users;' ).fetchall( ) )
