@@ -16,7 +16,6 @@
 # 	flask_app.run( debug = True )
 
 from flask import Flask , render_template , url_for , redirect , request , session
-from flask import Flask, jsonify, request, json
 #from flask_bootstrap import Bootstrap
 #from flask_mysqldb import MySQL
 #import yaml
@@ -81,7 +80,7 @@ db = SQLAlchemy( app )
 #     return render_template( 'index.html' )#, fruits = fruits )
 #     # redirect the homepage to the about page
 #     #  return redirect( url_for( 'about' ) )
-CORS(app)
+#CORS(app)
 @app.route( '/' , methods = [ 'GET' , 'POST' ] )
 def index(  ) :
     if request.method == 'POST' :
