@@ -100,7 +100,7 @@ def index(  ) :
 
     if request.method == 'POST' :
         form = request.form
-        first_name = firm.get( 'name' )#request.get_json( force = True )['name']
+        first_name = form.get( 'name' )#request.get_json( force = True )['name']
         email = form.get( 'email' )#request.get_json( force = True )['email']
         #password = bcrypt.generate_password_hash(request.get_json()['password']).decode('utf-8')
         created = datetime.utcnow()
