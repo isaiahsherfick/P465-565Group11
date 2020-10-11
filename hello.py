@@ -127,4 +127,4 @@ def about( ) :
 if __name__ == '__main__' :
     # debug = True makes it convenient by restarting the server whenever code is updated
     # default port 5000 , can pass it in the argument if we want to change it
-    app.run( debug = True )
+    app.run( debug = True , port = 5000 )
