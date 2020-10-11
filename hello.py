@@ -104,7 +104,7 @@ def index(  ) :
         first_name = form.get( 'name' )#request.get_json( force = True )['name']
         email = form.get( 'email' )#request.get_json( force = True )['email']
         #password = bcrypt.generate_password_hash(request.get_json()['password']).decode('utf-8')
-        created = datetime.utcnow()
+        #created = datetime.utcnow()
         ids = len( connection.execute( 'SELECT * FROM users;' ).fetchall( ) )
         connection.execute( 'INSERT INTO users(id,name,username,password) VALUES(%s,%s,%s,%s);' , ( ids+1, first_name,email,"Pass@1" ) )
         result = {'email': email + ' registered'}
