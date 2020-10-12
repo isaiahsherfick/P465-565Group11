@@ -6,6 +6,7 @@ CREATE TABLE public.locations
     type character varying(50) COLLATE pg_catalog."default" NOT NULL,
 	--type field will be what kind of location it is.
 	--ex: "hotel", "restaurant", "city"
+    name character varying(50) COLLATE pg_catalog."default",
     CONSTRAINT locations_pkey PRIMARY KEY (id)
 )
 
