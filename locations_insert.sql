@@ -1,0 +1,16 @@
+insert into locations values('Bloomington',1,'IN','city','Bloomington');
+insert into locations values('Bloomington',2,'IN','attraction','Indiana University');
+insert into locations values('Bloomington',3,'IN','hotel','Super 8 by Wyndam');
+insert into locations values('Bloomington',4,'IN','restaurant','Taste of India');
+insert into locations values('Chicago',4,'IL','city','Chicago');
+insert into locations values('Chicago',5,'IL','attraction','Chicago Pier');
+insert into locations values('Chicago',6,'IL','hotel','Homewood Suites');
+insert into locations values('Chicago',7,'IL','restaurant','Bryanna\'s Restaurant');
+insert into locations values('Detroit',8,'MI','city','Detroit');
+insert into locations values('Detroit',9,'MI','attraction','Detroit Institute of Arts');
+insert into locations values('Detroit',10,'MI','restaurant','Dilla\'s Delights');
+insert into locations values('Detroit',11,'MI','hotel','MotorCity Casino Hotel');
+insert into locations values('Los Angeles',12,'CA','city','Los Angeles');
+insert into locations values('Los Angeles',13,'CA','attraction','Venice Beach');
+insert into locations values('Los Angeles',14,'CA','hotel','Hotel Indigo Los Angeles Downtown');
+insert into locations values('Los Angeles',15,'CA','restaurant','San Pedro Fish Market & Restaurant');
