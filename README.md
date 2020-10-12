@@ -42,3 +42,5 @@ Create a Github pull request for the newly pushed branch with appropriate title 
 When you finish the task make sure your change works and will not break master build. 
 
 Remove the WIP label and assign a couple of team members to review the code. This can ensure good code quality. Reviewers will review the PR and add comments if changes are required. Repeat this till the PR is approved. The PR can be merged once it is approved and the task should be moved to done state.
+
+Thank you for your contributions. 
