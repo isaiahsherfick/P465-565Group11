@@ -19,9 +19,7 @@ import GridContainer from "../../components/Grid/GridContainer";
 import GridItem from "../../components/Grid/GridItem";
 import styles from "assets/jss/material-kit-react/views/loginPage.js";
 
-#import FacebookLogin from 'react-facebook-login';
 
-#import GoogleLogin from 'react-google-login';
 
 const useStyles = makeStyles(styles);
 //const classes = useStyles();
