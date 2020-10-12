@@ -19,9 +19,9 @@ import GridContainer from "../../components/Grid/GridContainer";
 import GridItem from "../../components/Grid/GridItem";
 import styles from "assets/jss/material-kit-react/views/loginPage.js";
 
-import FacebookLogin from 'react-facebook-login';
+#import FacebookLogin from 'react-facebook-login';
 
-import GoogleLogin from 'react-google-login';
+#import GoogleLogin from 'react-google-login';
 
 const useStyles = makeStyles(styles);
 //const classes = useStyles();
@@ -133,23 +133,7 @@ export default class SignupButton extends React.Component {
     >
       <i className={"fab fa-twitter"} />
     </Button>
-    <Link to="/map-page">
-    <FacebookLogin
-        appId="350321539653216" //APP ID NOT CREATED YET
-        fields="name,email,picture"
-        callback={responseFacebook}
-      />
-      </Link>
-      <br />
-      <br />
 
-
-      <GoogleLogin
-        clientId="" //CLIENTID NOT CREATED YET
-        buttonText="LOGIN WITH GOOGLE"
-        onSuccess={responseGoogle}
-        onFailure={responseGoogle}
-      />
     <Button
       justIcon
       href="#pablo"
