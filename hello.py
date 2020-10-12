@@ -16,6 +16,7 @@
 # 	flask_app.run( debug = True )
 
 from flask import Flask , render_template , url_for , redirect , request , session
+from flask_cors import CORS
 #from flask_bootstrap import Bootstrap
 #from flask_mysqldb import MySQL
 #import yaml
