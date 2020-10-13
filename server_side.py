@@ -50,7 +50,7 @@ def login(  ) :
         result = { 'status' : 'Incomplete Credentials' }
         return jsonify( result )
     # verification that the username and password matches as the one in database
-    if connection.execute( 'SELECT * FROM users where username=(%s) AND password=(%s);' , ( email , password ) ).fetchall( )[ 0 ] :
+    if connection.execute( 'SELECT * FROM users where username=(%s) AND password=(%s);' , ( email , password ) ).fetchall( ) :
         # Success in that case
         result = { 'status' : 'Success' }
     else :
