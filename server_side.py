@@ -4,6 +4,7 @@ from flask_cors import CORS
 #import datetime
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import create_engine
+from flask_bcrypt import Bcrypt
 
 # intializing app in python
 server = Flask(__name__,static_folder='./build' ,static_url_path='/')
@@ -12,6 +13,7 @@ engine = create_engine( DB_URL )
 connection = engine.connect( )
 server.config[ 'SQLALCHEMY_DATABASE_URI' ] = DB_URL
 server.config[ 'SQLALCHEMY_TRACK_MODIFICATIONS' ] = False
+bcrypt = Bcrypt(app)
 
 # User registering function which posts the data
 @server.route( '/users/register' , methods = [ 'POST' ] )
