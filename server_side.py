@@ -13,6 +13,7 @@ connection = engine.connect( )
 server.config[ 'SQLALCHEMY_DATABASE_URI' ] = DB_URL
 server.config[ 'SQLALCHEMY_TRACK_MODIFICATIONS' ] = False
 bcrypt = Bcrypt( server )
+CORS(server)
 
 # User registering function which posts the data
 @server.route( '/users/register' , methods = [ 'POST' ] )
@@ -58,7 +59,7 @@ def login(  ) :
     password_hash = connection.execute( 'SELECT * FROM users where username=(%s)' , ( email ) ).fetchall( )[ -1 ][ 3 ].encode( 'utf-8' )
     if bcrypt.check_password_hash( password_hash , password ) :
         # Success in that case
-        result = { 'status' : 'Success' }
+        result = { 'status' : 'Login Success' }
     else :
         # otherwise writing wrong username or password
         result = { 'status' : 'Incorrect Username or Password' }
