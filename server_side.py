@@ -1,7 +1,6 @@
 # import necessary libaries
 from flask import Flask , render_template , url_for , redirect , request , session , jsonify
 from flask_cors import CORS
-#import datetime
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import create_engine
 from flask_bcrypt import Bcrypt
@@ -22,7 +21,12 @@ def register(  ) :
     first_name = request.get_json( force = True )[ 'name' ]
     email = request.get_json( force = True )[ 'email' ]
     # and decrypting the password
-    password = bcrypt.generate_password_hash( request.get_json( )[ 'password' ] ).decode( 'utf-8' )
+    password = request.get_json( )[ 'password' ]#.encode( 'utf-8' )
+    # generating password encryption hash and decoding it from bytes to a string
+    # to be stored to a database
+    password_hash = bcrypt.generate_password_hash( password ).decode( 'utf-8' )
+    #password_hash = bcrypt.hashpw( password , bcrypt.gensalt( ) )
+    #password = bcrypt.generate_password_hash( request.get_json( )[ 'password' ] ).decode( 'utf-8' )
     # if any of the arguments are missing they failure is returned although the frontend is automatically handling it
     # its just an added safety feature
     if not ( first_name and email and password ) :
@@ -31,7 +35,7 @@ def register(  ) :
     # allocating id to the user which already exists
     ids = len( connection.execute( 'SELECT * FROM users;' ).fetchall( ) )
     # adding user details to the database with encrypted database
-    connection.execute( 'INSERT INTO users(id,name,username,password) VALUES(%s,%s,%s,%s);' , ( ids + 1 , first_name , email , password ) )
+    connection.execute( 'INSERT INTO users(id,name,username,password) VALUES(%s,%s,%s,%s);' , ( ids + 1 , first_name , email , password_hash ) )
     # sending a positive response to the frontend
     result = { 'status' : 'Success' }
     # returning json object
@@ -43,14 +47,16 @@ def login(  ) :
     # receiving the user email and password
     email = request.get_json( force = True )[ 'email' ]
     # and decrypting the password
-    password = bcrypt.generate_password_hash( request.get_json( )[ 'password' ] ).decode( 'utf-8' )
+    password = request.get_json( )[ 'password' ]
     # if any of the arguments are missing they failure is returned although the frontend is automatically handling it
     # its just an added safety feature
     if not ( email and password ) :
         result = { 'status' : 'Incomplete Credentials' }
         return jsonify( result )
     # verification that the username and password matches as the one in database
-    if connection.execute( 'SELECT * FROM users where username=(%s) AND password=(%s);' , ( email , password ) ).fetchall( ) :
+    # and getting the hash from the database and encoding it to appropriate datatype
+    password_hash = connection.execute( 'SELECT * FROM users where username=(%s)' , ( email ) ).fetchall( )[ -1 ][ 3 ].encode( 'utf-8' )
+    if bcrypt.check_password_hash( password_hash , password ) :
         # Success in that case
         result = { 'status' : 'Success' }
     else :
