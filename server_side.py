@@ -38,7 +38,7 @@ def register(  ) :
     return jsonify( result )
 
 # user login function which gets the Credentials and verifies them
-@server.route( '/users/login' , methods = [ 'GET' ] )
+@server.route( '/users/login' , methods = [ 'POST' ] )
 def login(  ) :
     # receiving the user email and password
     email = request.get_json( force = True )[ 'email' ]
