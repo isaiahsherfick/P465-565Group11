@@ -13,7 +13,7 @@ engine = create_engine( DB_URL )
 connection = engine.connect( )
 server.config[ 'SQLALCHEMY_DATABASE_URI' ] = DB_URL
 server.config[ 'SQLALCHEMY_TRACK_MODIFICATIONS' ] = False
-bcrypt = Bcrypt(app)
+bcrypt = Bcrypt( server )
 
 # User registering function which posts the data
 @server.route( '/users/register' , methods = [ 'POST' ] )
