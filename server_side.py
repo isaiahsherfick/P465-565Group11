@@ -35,6 +35,7 @@ def register(  ) :
     # returning json object
     return jsonify( result )
 
+# user login function which gets the Credentials and verifies them
 @server.route( '/users/login' , methods = [ 'GET' ] )
 def login(  ) :
     # receiving the user email and password
@@ -44,15 +45,15 @@ def login(  ) :
     # if any of the arguments are missing they failure is returned although the frontend is automatically handling it
     # its just an added safety feature
     if not ( first_name and email and password ) :
-        result = { 'status' : 'Failure' }
+        result = { 'status' : 'Incomplete Credentials' }
         return jsonify( result )
-    # verificatin that the username and password matches as the one in database
-    connection.execute( 'INSERT INTO users(id,name,username,password) VALUES(%s,%s,%s,%s);' , ( email , password ) ).fetchall( )
-    # returning Success in that case
-    result = { 'status' : 'Success' }
-    connection.execute(  )
-    # otherwise writing wrong username or password
-    result = { 'status' : 'Incorrect Username or password' }
+    # verification that the username and password matches as the one in database
+    if connection.execute( 'SELECT * FROM users where username=(%s) AND password=(%s);' , ( email , password ) ).fetchall( )[ 0 ] :
+        # Success in that case
+        result = { 'status' : 'Success' }
+    else :
+        # otherwise writing wrong username or password
+        result = { 'status' : 'Incorrect Username or Password' }
     # returning json object
     return jsonify( result )
 
