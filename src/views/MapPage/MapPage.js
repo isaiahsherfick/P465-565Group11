@@ -12,7 +12,7 @@ const MapPage = () => {
 
   frameborder="0" 
   style={{border:0}}
-  src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDAwFRjZJPeT3I9R4nGBap0gJorBu9aHLc
+  src="https://www.google.com/maps/embed/v1/place?key=API_KEY
     &q=Space+Needle,Seattle+WA" allowfullscreen>
 </iframe>
             </div>
