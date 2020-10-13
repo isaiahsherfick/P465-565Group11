@@ -46,7 +46,7 @@ def login(  ) :
     password = bcrypt.generate_password_hash( request.get_json( )[ 'password' ] ).decode( 'utf-8' )
     # if any of the arguments are missing they failure is returned although the frontend is automatically handling it
     # its just an added safety feature
-    if not ( first_name and email and password ) :
+    if not ( email and password ) :
         result = { 'status' : 'Incomplete Credentials' }
         return jsonify( result )
     # verification that the username and password matches as the one in database
