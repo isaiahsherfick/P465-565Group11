@@ -70,9 +70,13 @@ def login(  ) :
 # city returning the attractions the client_side
 @server.route( '/search' , methods = [ 'POST' ] )
 def city_attractions( ) :
+    # getting the input from the user
     city_name = request.get_json( force = True )[ 'city' ]
+    # calling in the city object
     input_city = City( [ '' , '' , '' , '' ] )
+    # initalizing the database with city name as fed in the input
     input_city.initFromDatabase( city_name )
+    # returning the json object client_side wants
     return jsonify( input_city.getAttractions( ) )
 
 # checks whether current file is running
