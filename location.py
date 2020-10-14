@@ -1,5 +1,6 @@
 # importing necessary libraries
 from collections import defaultdict
+from flask import jsonify
 from abc import abstractmethod
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import create_engine
@@ -63,7 +64,7 @@ class Location:
     # empty abstract function for now, will be refactored in future
     @abstractmethod
     def initFromDatabase( self ) :
-        print(None)
+        return ''
 
 
     # test case for the purpose of verification
@@ -78,28 +79,20 @@ class Location:
 class City( Location ) :
 
     # constructor taking in the arguments and calling the parent class with respective input arguments
-    def __init__( self , location = [ '' , '' , '' , '' ] , hotels = '' , restaurants = '' , flights = '' , attractions = '' ) :
+    def __init__( self , location = [ '' , '' , '' , '' ] , attractions = defaultdict( list ) ) :
         super( City , self ).__init__( location[ 0 ] , location[ 1 ] , location[ 2 ] , location[ 3 ] )
-        self.hotels = hotels
-        self.restaurants = restaurants
-        self.flights = flights
+        # self.hotels = hotels
+        # self.restaurants = restaurants
+        # self.flights = flights
         self.attractions = attractions
-
-    # returning hotels
-    def getHotels( self  ) :
-        return self.hotels
-
-    # returning restaurants
-    def getRestaurants( self  ) :
-        return self.restaurants
-
-    # returning flights
-    def getFlights( self  ) :
-        return self.flights
 
     # return attractions
     def getAttractions( self ) :
         return self.attractions
+
+    # setting the attractions as per input
+    def setAttractions( self , attractions = defaultdict( list ) ) :
+        self.attractions = attractions
 
     # generating a summary using the input and feeding in to a dictionary
     # and returning it to the client_side for the convenience of using JSON object
@@ -117,26 +110,60 @@ class City( Location ) :
         # SQL query tested on Heroku by Isiash
         # since it belongs to a single row for now we just access the first element
         # and use its information to set the arguments
-        summary = connection.execute( "SELECT * FROM locations WHERE type='city' AND name=(%s) ;" , ( cityName ) ).fetchall( )[ 0 ]
+        summary = connection.execute( "SELECT * FROM locations WHERE type='city' AND name=(%s) ;" , ( cityName ) ).fetchall( )[ -1 ]
+        # getting the attractions list as per the city input
+        attractions_list = connection.execute( "SELECT * FROM locations WHERE city=(%s)" , ( cityName ) ).fetchall( )
+
+        for elem in attractions_list :
+            if elem[ 3 ] != 'city' :
+                self.attractions[ elem[ 3 ] ] += elem[ 4 ] ,
+
         self.setCity( summary[ 0 ] )
         self.setState( summary[ 2 ] )
         self.setType( summary[ 3 ] )
         self.setName( summary[ 4 ] )
 
-# Attraction class
-class Attraction( Location ) :
+# not needed as per now
+# # Attraction class
+# class Attraction( Location ) :
+#
+#     # the constructor which takes in argument as price
+#     # which can be used for flights, hotels and places of visits as well.
+#     def __init__( self , attractions_list = [ ] ) :
+#         self.price = price
+#         self.attractions_list = attractions_list
+#
+#
+#     # returning the price
+#     def getPrice( self ) :
+#         return self.price
+#
+#     # setting the price as per what is fed in
+#     def setPrice( self , price = '' ) :
+#         self.price = price
+#
+#     # def initFromDatabase( self ) :
 
-    # the constructor which takes in argument as price
-    # which can be used for flights, hotels and places of visits as well.
-    def __init__( self , price = -1 ) :
-        self.price = price
-
-    # returning the price
-    def getPrice( self ) :
-        return self.price
-
-    # setting the price as per what is fed in
-    def setPrice( self , price = '' ) :
-        self.price = price
-
-    # def initFromDatabase( self ) :
+# # returning hotels
+# def getHotels( self  ) :
+#     return self.hotels
+#
+# # setting the hotels as per input
+# def setHotels( self , hotels = [ ] ) :
+#     self.hotels = hotels
+#
+# # returning restaurants
+# def getRestaurants( self ) :
+#     return self.restaurants
+#
+# # setting the restaurants as per input
+# def setRestaurants( self , restaurants = [ ] ) :
+#     self.restaurants = restaurants
+#
+# # returning flights
+# def getFlights( self  ) :
+#     return self.flights
+#
+# # setting the flights as per input
+# def setFlights( self , flights = [ ] ) :
+#     self.flights = flights

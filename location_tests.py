@@ -35,10 +35,10 @@ testing_city.initFromDatabase( 'Chicago' )
 # checking the get function to see if the
 # set function has been called and all the items
 # have been instantiated as per the call from the get function
-print( testing_city.getCity( ) )
-print( testing_city.getState( ) )
-print( testing_city.getType( ) )
-print( testing_city.getName( ) )
+# print( testing_city.getCity( ) )
+# print( testing_city.getState( ) )
+# print( testing_city.getType( ) )
+# print( testing_city.getName( ) )
 
 # checking the two objects which should have same parameters
-print( chicago.verification_Data( testing_city ) )
+# print( chicago.verification_Data( testing_city ) )

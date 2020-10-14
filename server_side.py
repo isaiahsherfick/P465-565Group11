@@ -1,6 +1,7 @@
 # import necessary libaries
 from flask import Flask , render_template , url_for , redirect , request , session , jsonify
 from flask_cors import CORS
+from location import *
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import create_engine
 from flask_bcrypt import Bcrypt
@@ -65,6 +66,14 @@ def login(  ) :
         result = { 'status' : 'Incorrect Username or Password' }
     # returning json object
     return jsonify( result )
+
+# city returning the attractions the client_side
+@server.route( '/search' , methods = [ 'POST' ] )
+def city_attractions( ) :
+    city_name = request.get_json( force = True )[ 'city' ]
+    input_city = City( [ '' , '' , '' , '' ] )
+    input_city.initFromDatabase( city_name )
+    return jsonify( input_city.getAttractions( ) )
 
 # checks whether current file is running
 if __name__ == '__main__' :
