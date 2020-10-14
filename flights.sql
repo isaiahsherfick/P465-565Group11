@@ -24,3 +24,4 @@ TABLESPACE pg_default;
 
 ALTER TABLE public.flights
     OWNER to ugcuvkvpcdaixu;
+
