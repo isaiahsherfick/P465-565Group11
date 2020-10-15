@@ -6,7 +6,14 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import create_engine
 import datetime , pytz
 
-class Flights :
+# Adding the Heroku URL
+DB_URL = 'postgres://ugcuvkvpcdaixu:b624b6193c9e248af602f7239c6ddca6848239242adbcb31a9fd4685ac75aabf@ec2-204-236-228-169.compute-1.amazonaws.com:5432/d93me5889f2sp1'
+# Building a connection to the database
+engine = create_engine( DB_URL )
+connection = engine.connect( )
+
+
+class Flight :
     def __init__( self , itinerary = defaultdict( list ) ) :
         self.takeOffTime = itinerary[ 'takeOffTime' ]
         self.startCity = itinerary[ 'startCity' ]
@@ -73,3 +80,24 @@ class Flights :
     # setting the arrivalTime as per input
     def setArrivalTime( self , arrivalTime ) :
         self.arrivalTime = arrivalTime
+
+
+    def initFromDB(self, id):
+        summary = connection.execute( "SELECT * FROM flights WHERE id=(%s);" , (id) ).fetchall( )[ -1 ]
+        print(summary)
+        self.setTakeOffTime(str(summary[0]))
+        self.setStartCity(summary[1])
+        self.setEndCity(summary[3])
+        self.setBusinessRate(summary[4])
+        self.setAirline(summary[5])
+        self.setCoachRate(summary[6])
+        self.setArrivalTime(str(summary[7]))
+
+    def equals(self, other):
+        return self.getTakeOffTime() == other.getTakeOffTime() and \
+        self.getStartCity() == other.getStartCity() and \
+        self.getEndCity() == other.getEndCity() and \
+        self.getBusinessRate() == other.getBusinessRate() and \
+        self.getAirline() == other.getAirline() and \
+        self.getArrivalTime() == other.getArrivalTime() and \
+        self.getCoachRate() == other.getCoachRate()

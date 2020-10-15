@@ -108,7 +108,7 @@ class City( Location ) :
     # intiailizing the database as the per the cityname which
     # is fed in as an argument and used to map the row it belongs too
     def initFromDatabase( self , cityName = '' ) :
-        # SQL query tested on Heroku by Isiash
+        # SQL query tested on Heroku by Isaiah
         # since it belongs to a single row for now we just access the first element
         # and use its information to set the arguments
         summary = connection.execute( "SELECT * FROM locations WHERE type='city' AND name=(%s) ;" , ( cityName ) ).fetchall( )[ -1 ]
