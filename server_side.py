@@ -2,6 +2,7 @@
 from flask import Flask , render_template , url_for , redirect , request , session , jsonify
 from flask_cors import CORS
 from location import *
+from flights import *
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import create_engine
 from flask_bcrypt import Bcrypt
