@@ -46,8 +46,9 @@ print( testFlightToLA.getCoachRate( ) )
 print( testFlightToLA.getArrivalTime( ) )
 print("---------------------output for testFlightToLA--------------------------")
 
-testFlightFromDB = Flight()
-testFlightFromDB.initFromDB(0)
+# intiailizing the datetime
+testFlightFromDB = Flight( )
+testFlightFromDB.initFromDatabase( 0 )
 print("---------------------output for testFlightFromDB-------------------------")
 print(testFlightFromDB.getTakeOffTime( ) )
 print( testFlightFromDB.getStartCity( ) )
@@ -58,6 +59,5 @@ print( testFlightFromDB.getCoachRate( ) )
 print( testFlightFromDB.getArrivalTime( ) )
 print("---------------------output for testFlightFromDB-------------------------")
 
-
-print(testFlightFromDB.equals(testFlightToLA))
-
+# verificationt that the testing function is querying the database correctly as the data we have fed in
+print( testFlightFromDB.equals( testFlightToLA ) )

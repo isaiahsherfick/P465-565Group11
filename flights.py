@@ -81,23 +81,23 @@ class Flight :
     def setArrivalTime( self , arrivalTime ) :
         self.arrivalTime = arrivalTime
 
+    # intialized the database by accessing the flight details for the respective id
+    def initFromDatabase( self , id ) :
+        summary = connection.execute( "SELECT * FROM flights WHERE id=(%s);" , ( id ) ).fetchall( )[ -1 ]
+        self.setTakeOffTime( str( summary[ 0 ] ) )
+        self.setStartCity( summary[ 1 ] )
+        self.setEndCity( summary[ 3 ] )
+        self.setBusinessRate( summary[ 4 ] )
+        self.setAirline( summary[ 5 ] )
+        self.setCoachRate( summary[ 6 ]  )
+        self.setArrivalTime( str( summary[ 7 ] ) )
 
-    def initFromDB(self, id):
-        summary = connection.execute( "SELECT * FROM flights WHERE id=(%s);" , (id) ).fetchall( )[ -1 ]
-        print(summary)
-        self.setTakeOffTime(str(summary[0]))
-        self.setStartCity(summary[1])
-        self.setEndCity(summary[3])
-        self.setBusinessRate(summary[4])
-        self.setAirline(summary[5])
-        self.setCoachRate(summary[6])
-        self.setArrivalTime(str(summary[7]))
-
-    def equals(self, other):
-        return self.getTakeOffTime() == other.getTakeOffTime() and \
-        self.getStartCity() == other.getStartCity() and \
-        self.getEndCity() == other.getEndCity() and \
-        self.getBusinessRate() == other.getBusinessRate() and \
-        self.getAirline() == other.getAirline() and \
-        self.getArrivalTime() == other.getArrivalTime() and \
-        self.getCoachRate() == other.getCoachRate()
+    # verification functions for testing
+    def equals( self , other ) :
+        return self.getTakeOffTime() == other.getTakeOffTime( ) and \
+        self.getStartCity( ) == other.getStartCity( ) and \
+        self.getEndCity( ) == other.getEndCity( ) and \
+        self.getBusinessRate( ) == other.getBusinessRate( ) and \
+        self.getAirline( ) == other.getAirline( ) and \
+        self.getArrivalTime( ) == other.getArrivalTime( ) and \
+        self.getCoachRate( ) == other.getCoachRate( )

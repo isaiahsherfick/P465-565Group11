@@ -30,7 +30,7 @@ chicago = City( [ 'Chicago' , 'IL' , 'city' , 'Chicago' ] )
 testing_city = City( [ '' , '' , '' , '' ] )
 
 # intiailizing the database as the per the city argument
-testing_city.initFromDatabase( 'Chicago' )
+#testing_city.initFromDatabase( 'Chicago' )
 
 # checking the get function to see if the
 # set function has been called and all the items
@@ -42,3 +42,5 @@ testing_city.initFromDatabase( 'Chicago' )
 
 # checking the two objects which should have same parameters
 # print( chicago.verification_Data( testing_city ) )
+
+testing_city.initFromDatabase( 'Los Angeles' )

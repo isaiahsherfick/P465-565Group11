@@ -80,11 +80,11 @@ class Location:
 class City( Location ) :
 
     # constructor taking in the arguments and calling the parent class with respective input arguments
-    def __init__( self , location = [ '' , '' , '' , '' ] , attractions = defaultdict( list ) ) :
+    def __init__( self , location = [ '' , '' , '' , '' ] , attractions = defaultdict( list ) , flights = '' ) :
         super( City , self ).__init__( location[ 0 ] , location[ 1 ] , location[ 2 ] , location[ 3 ] )
         # self.hotels = hotels
         # self.restaurants = restaurants
-        # self.flights = flights
+        self.flights = flights
         self.attractions = attractions
 
     # return attractions
@@ -114,6 +114,11 @@ class City( Location ) :
         summary = connection.execute( "SELECT * FROM locations WHERE type='city' AND name=(%s) ;" , ( cityName ) ).fetchall( )[ -1 ]
         # getting the attractions list as per the city input
         attractions_list = connection.execute( "SELECT * FROM locations WHERE city=(%s)" , ( cityName ) ).fetchall( )
+
+        # functional query to access the database and get the flight itenaries
+        flight_summary = connection.execute( "SELECT id FROM flights WHERE startcity IN ( SELECT name FROM locations WHERE type='city' AND name=(%s) ) OR endcity IN ( SELECT name FROM locations WHERE type='city' AND name=(%s) ) ; " \
+        , ( cityName , cityName ) ).fetchall( )[ -1 ]
+
 
         for elem in attractions_list :
             if elem[ 3 ] != 'city' :
