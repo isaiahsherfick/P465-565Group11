@@ -116,9 +116,8 @@ class City( Location ) :
         attractions_list = connection.execute( "SELECT * FROM locations WHERE city=(%s)" , ( cityName ) ).fetchall( )
 
         # functional query to access the database and get the flight itenaries
-        flight_summary = connection.execute( "SELECT id FROM flights WHERE startcity IN ( SELECT name FROM locations WHERE type='city' AND name=(%s) ) OR endcity IN ( SELECT name FROM locations WHERE type='city' AND name=(%s) ) ; " \
-        , ( cityName , cityName ) ).fetchall( )[ -1 ]
-
+        #flight_summary = connection.execute( "SELECT id FROM flights WHERE startcity IN ( SELECT name FROM locations WHERE type='city' AND name=(%s) ) OR endcity IN ( SELECT name FROM locations WHERE type='city' AND name=(%s) ) ; " \
+        #, ( cityName , cityName ) ).fetchall( )[ -1 ]
 
         for elem in attractions_list :
             if elem[ 3 ] != 'city' :
