@@ -293,7 +293,7 @@ export default class LoginForm extends Component{
 											fields="name,email,picture"
 											//callback={responseFacebook}
 										/>
-										<span></span>
+										<div style={{alignContent:'center'}}>OR</div>
 
 										<GoogleLogin
 											clientId="" //CLIENTID NOT CREATED YET
@@ -301,6 +301,7 @@ export default class LoginForm extends Component{
 											// onSuccess={responseGoogle}
 											// onFailure={responseGoogle}
 										/>
+										<br></br>
 									</div>: null
 									
 								}
