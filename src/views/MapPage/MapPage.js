@@ -1,5 +1,5 @@
 import React from 'react';
-import './search.css'
+ import './search.scss'
 //import Input from 'components/CustomInput/CustomInput.js'
 import axios from "axios";
 
