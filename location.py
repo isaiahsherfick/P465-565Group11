@@ -80,12 +80,13 @@ class Location:
 class City( Location ) :
 
     # constructor taking in the arguments and calling the parent class with respective input arguments
-    def __init__( self , location = [ '' , '' , '' , '' ] , attractions = defaultdict( list ) , flights = '' ) :
+    def __init__( self , location = [ '' , '' , '' , '' ] , attractions = defaultdict( list ) , flights = [ ] , image_url = '' ) :
         super( City , self ).__init__( location[ 0 ] , location[ 1 ] , location[ 2 ] , location[ 3 ] )
         # self.hotels = hotels
         # self.restaurants = restaurants
         self.flights = flights
         self.attractions = attractions
+        self.image_url = image_url
 
     # return attractions
     def getAttractions( self ) :
@@ -95,14 +96,29 @@ class City( Location ) :
     def setAttractions( self , attractions = defaultdict( list ) ) :
         self.attractions = attractions
 
+    def getFlights( self ) :
+        return self.flights
+
+    def setFlights( self , flights ) :
+        self.flights = flights
+
+    def getImageUrl( self ) :
+        return self.image_url
+
+    def setImageUrl( self , image_url ) :
+        self.image_url = image_url
+
     # generating a summary using the input and feeding in to a dictionary
     # and returning it to the client_side for the convenience of using JSON object
     def generateExplore( self ) :
         summary = defaultdict( list )
-        summary[ hotels ] = self.getHotels( )
-        summary[ restaurants ] = self.getRestaurants( )
-        summary[ flights ] = self.flights( )
-        summary[ attractions ] = self.getAttractions( )
+        #summary[ 'hotels' ] = self.getHotels( )
+        #summary[ 'restaurants' ] = self.getRestaurants( )
+        # object for the frontend which returns the output to the heroku
+        for elem in self.getFlights( ) :
+            summary[ 'flights' ] += elem.reportData( ) ,
+        summary[ 'attractions' ] = self.getAttractions( )
+        summary[ 'image_url' ] = self.getImageUrl( )
         return summary
 
     # intiailizing the database as the per the cityname which
@@ -119,6 +135,16 @@ class City( Location ) :
         flight_summary = connection.execute( "SELECT id FROM flights WHERE startcity IN ( SELECT name FROM locations WHERE type='city' AND name=(%s) ) OR endcity IN ( SELECT name FROM locations WHERE type='city' AND name=(%s) ) ; " \
         , ( cityName , cityName ) ).fetchall( )[ -1 ]
 
+
+        # iterating through ids in flight_summary
+        for ids in flight_summary :
+            new_flight = Flight( )
+            new_flight.initFromDatabase( ids )
+            # initializing the database for that id and adding it to the database
+            self.flights += new_flight ,
+
+        # for elem in flight_summary :
+
         for elem in attractions_list :
             if elem[ 3 ] != 'city' :
                 self.attractions[ elem[ 3 ] ] += elem[ 4 ] ,
@@ -127,3 +153,4 @@ class City( Location ) :
         self.setState( summary[ 2 ] )
         self.setType( summary[ 3 ] )
         self.setName( summary[ 4 ] )
+        self.setImageUrl( summary[ 5 ] )

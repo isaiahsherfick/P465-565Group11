@@ -44,3 +44,5 @@ testing_city = City( [ '' , '' , '' , '' ] )
 # print( chicago.verification_Data( testing_city ) )
 
 testing_city.initFromDatabase( 'Los Angeles' )
+
+#print( testing_city.getFlights( )[ 0 ].reportData( ) )

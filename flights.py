@@ -92,6 +92,18 @@ class Flight :
         self.setCoachRate( summary[ 6 ]  )
         self.setArrivalTime( str( summary[ 7 ] ) )
 
+    def reportData( self ) :
+        # making a dictionary of all the features which one maps for all the getter functions
+        report_document = defaultdict( list )
+        report_document[ "TakeOffTime" ] = self.getTakeOffTime( )
+        report_document[ "StartCity" ] = self.getStartCity( )
+        report_document[ "EndCity" ] = self.getEndCity( )
+        report_document[ "BusinessRate" ] = self.getBusinessRate( )
+        report_document[ "Airline" ] = self.getAirline( )
+        report_document[ "CoachRate" ] = self.getCoachRate( )
+        report_document[ "ArrivalTime" ] = self.getArrivalTime( )
+        return report_document
+
     # verification functions for testing
     def equals( self , other ) :
         return self.getTakeOffTime() == other.getTakeOffTime( ) and \

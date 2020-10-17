@@ -78,7 +78,7 @@ def city_attractions( ) :
     # initalizing the database with city name as fed in the input
     input_city.initFromDatabase( city_name )
     # returning the json object client_side wants
-    return jsonify( input_city.getAttractions( ) )
+    return jsonify( input_city.generateExplore( ) )
 
 # checks whether current file is running
 if __name__ == '__main__' :
