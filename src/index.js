@@ -14,6 +14,8 @@ import ProfilePage from "views/ProfilePage/ProfilePage.js";
 import LoginPage from "views/LoginPage/LoginPage.js";
 import MapPage from 'views/MapPage/MapPage.js'
 import Header from "./Header.js";
+import Explore from "../src/views/ExplorePage/Explore.js";
+
 
 
 
@@ -23,12 +25,13 @@ ReactDOM.render(
   <Router history={hist}>
     <Header />
     <Switch>
-      <Route path="/map-page" component={MapPage} />
-      <Route path="/landing-page" component={LandingPage} />
-      <Route path="/profile-page" component={ProfilePage} />
-      <Route path="/login-page" component={LoginPage} />
-      <Route path="/components" component={Components} />
-      <Route path="/" component={LoginPage} />
+      <Route exact path="/map-page" component={MapPage} />
+      <Route exact path="/landing-page" component={LandingPage} />
+      <Route exact path="/profile-page" component={ProfilePage} />
+      <Route exact path="/login-page" component={LoginPage} />
+      <Route exact path="/components" component={Components} />
+      <Route exact  path="/" component={LoginPage} />
+      <Route exact path="/explore" component={Explore}/>
       {/* <Route path="/explore-page" component={ExplorePage} /> */}
     </Switch>
   </Router>,
