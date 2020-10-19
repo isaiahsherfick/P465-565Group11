@@ -2,6 +2,10 @@ import React from 'react';
 //import './search.css'
 //import Input from 'components/CustomInput/CustomInput.js'
 import axios from "axios";
+import Header from "./Header";
+import { Link } from 'react-router-dom';
+import { setExploreData } from '../../helpers/common';
+
 
 const mapboxURL = 'https://api.mapbox.com/styles/v1/sneakbots/ckfg8aias0fui19s07ubr19sx.html?fresh=true&title=view&access_token=pk.eyJ1Ijoic25lYWtib3RzIiwiYSI6ImNrZmZzajh2azBmMnUydG83ZHlteDVqZGQifQ.ekQc9lMhLZop23CsTobsPA#11.09/33.7785/-118.256'
 
@@ -30,7 +34,9 @@ export default class MapPage extends React.Component{
         .then(res=>{
           console.log(res);
           console.log(res.data);
+          setExploreData(res.data);
           // window.location = "/retrieve" //This line of code will redirect you once the submission is succeed
+          this.props.history.push('/explore')
         })
     }
 
@@ -41,15 +47,19 @@ export default class MapPage extends React.Component{
     }
     render(){
       require("../../assets/scss/map/search.css")
+
       return (
           <div>
+              {/* <Header/> */}
+
               <div className="iframe">
               <iframe
 
     frameborder="0" 
     style={{border:0}}
+    
     src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDAwFRjZJPeT3I9R4nGBap0gJorBu9aHLc
-      &q=Space+Needle,Seattle+WA" allowfullscreen>
+      &q=Space+Needle,Seattle+WA" allowfullscreen="true">
   </iframe>
               </div>
               <form  role="search" className="form">
