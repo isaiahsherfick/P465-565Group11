@@ -68,7 +68,9 @@ class Itinerary( ) :
     # the itinerary comprising of all the tasks for a respective user id
     def saveItinerary( self ) :
         input = '{' + ','.join( self.tasks ) + '}'
-        i = connection.execute( 'INSERT INTO "Itenerary" VALUES (%s);' , ( input )  ).fetchall( )
+        # i = connection.execute( 'INSERT INTO "Itenerary" VALUES (%s);' , ( input )  ).fetchall( )
+        # insert into "Itenerary" values (%d, %d, '{$array}');
+        i = connection.execute( "INSERT INTO 'Itenerary' values (%s);" , ( input )  ).fetchall( )
         print( '10' , i )
 
     # returning json object of the list of tasks
