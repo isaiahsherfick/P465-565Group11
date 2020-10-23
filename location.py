@@ -99,8 +99,7 @@ class City():
         # SQL query tested on Heroku by Isaiah
         # since it belongs to a single row for now we just access the first element
         # and use its information to set the arguments
-        summary = \
-        connection.execute("SELECT * FROM locations WHERE type='city' AND name=(%s) ;", (cityName)).fetchall()[-1]
+        summary = connection.execute("SELECT * FROM locations WHERE type='city' AND name=(%s) ;", (cityName)).fetchall()[-1]
         # getting the attractions list as per the city input
         attractions_list = connection.execute("SELECT * FROM locations WHERE city=(%s)", (cityName)).fetchall()
 
