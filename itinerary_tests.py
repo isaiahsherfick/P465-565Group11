@@ -7,4 +7,4 @@ from itinerary import *
 
 # sample testing
 a = Itinerary( 0 ,[ '10:00 AM Indy', '4:00PM LA', '6:30PM Denny' ] )
-print( a.saveItinerary( ) )
+a.saveItinerary()

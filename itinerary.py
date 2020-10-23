@@ -14,7 +14,7 @@ engine = create_engine(DB_URL)
 connection = engine.connect()
 
 
-# Itinerary class to encapsulate city behavior for explore page
+# Itinerary class to connect frontend to DB
 class Itinerary( ) :
 
     # the constructor having the input ownerId and the list of tasks
@@ -22,8 +22,10 @@ class Itinerary( ) :
         self.ownerId = ownerId
         # self.tasks = processTasks( tasks )
         self.tasks = tasks
+    #in the case where we are constructing the Itinerary object from the DB to pass to the frontend, a blank one will be instantiated
+    #then initFromDB will be called to populate the member variables
 
-    # adding in tasks to a preexisting list of tasks
+    # adding a task to a preexisting list of tasks
     def appendTask( self , task ) :
         self.tasks += task ,
 
@@ -67,11 +69,12 @@ class Itinerary( ) :
 
     # the itinerary comprising of all the tasks for a respective user id
     def saveItinerary( self ) :
-        input = '{' + ','.join( self.tasks ) + '}'
-        # i = connection.execute( 'INSERT INTO "Itenerary" VALUES (%s);' , ( input )  ).fetchall( )
-        # insert into "Itenerary" values (%d, %d, '{$array}');
-        i = connection.execute( "INSERT INTO 'Itenerary' values (%s);" , ( input )  ).fetchall( )
-        print( '10' , i )
+        tasksAsSQLArray = ''
+        for task in self.tasks:
+            tasksAsSQLArray += (',\"' + task + '\"')
+        tasksAsSQLArray = '{' + tasksAsSQLArray[1:] + '}'
+        connection.execute("INSERT INTO \"Itenerary\" values ({}, (\'{}\'));".format(self.ownerId, tasksAsSQLArray))
+        print("Made it here")
 
     # returning json object of the list of tasks
     def productJson( self ) :
