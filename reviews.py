@@ -85,16 +85,30 @@ class Review( ):
             self.review_body = reviews[ 5 ]
 
         # gather all reviews from the database for the particular unique_location_key
+        # makes a list of objects which is returned
+        # getting the average rating and the reviews of all the object reviews
         def gatherReviews( self , unique_location_key ) :
+            total_stars_out_of_five , objs = 0 , 0
             review_ids = connection.execute( "select review_id from reviews where unique_location_key='{}';".format( unique_location_key ) ).fetchall(  )
-            review_ids , all_reviews = [ ids[ 0 ] for ids in review_ids ] , [  ]
-            for ids in review_ids :
+            review_ids = [ ids[ 0 ] for ids in review_ids ]
+            reviews_json = { }
+            for id in review_ids :
                 obj = Review( )
-                obj.initFromDatabase( ids )
-                print( obj.setStarsOutOfFive( ) )
-                all_reviews += obj ,
-                print( obj.setStarsOutOfFive( ) )
-            return all_reviews
+                obj.initFromDatabase( id )
+                total_stars_out_of_five += int( obj.getStarsOutOfFive( ) )
+                reviews_json[ id ] = obj.produceJson( )
+                objs += 1
+            total_stars_out_of_five /= max( objs , 1 )
+            reviews_json[ "Average_Rating" ] = total_stars_out_of_five
+            return reviews_json
 
-        # def produceJson( self ) :
-        #     return json.dumps( { "tasks" : self.tasks } )
+        # json object for all the review parameters
+        def produceJson( self ) :
+            concat_json = { }
+            concat_json[ "reviewId" ] = self.review_id
+            concat_json[ "ownerId" ] = self.owner_id
+            concat_json[ "uniqueLocationKey" ] = self.unique_location_key
+            concat_json[ "starsOutOfFive" ] = self.stars_out_of_five
+            concat_json[ "reviewHeader" ] = self.review_header
+            concat_json[ "reviewBody" ] = self.review_body
+            return concat_json

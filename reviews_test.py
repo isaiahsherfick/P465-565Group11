@@ -26,4 +26,4 @@ testing_obj = Review( [ 0 , 0 , "abcdefg" , 3 , "Decent place" , "We had a good 
 # print( testing_obj.productJson( ) )
 
 
-testing_obj.gatherReviews( "abcdefg" )
+print( testing_obj.gatherReviews( "abcdefg" ) )
