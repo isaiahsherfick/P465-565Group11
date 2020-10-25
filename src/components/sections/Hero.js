@@ -5,6 +5,8 @@ import ButtonGroup from '../elements/ButtonGroup';
 import Button from '../elements/Button';
 import Image from '../elements/Image';
 import Modal from '../elements/Modal';
+import { Link } from 'react-router-dom';
+
 
 const propTypes = {
   ...SectionProps.types
@@ -68,12 +70,15 @@ const Hero = ({
                 Explore your favourite destinations!
                 </p>
               <div className="reveal-from-bottom" data-reveal-delay="600">
+                <Link to="/map-page">
                 <ButtonGroup>
-                  <Button tag="a" color="primary" wideMobile href="https://cruip.com/">
+                  <Button tag="a" color="primary" wideMobile href="#">
                     Search
                     </Button>
 
                 </ButtonGroup>
+                </Link>
+  
               </div>
             </div>
           </div>

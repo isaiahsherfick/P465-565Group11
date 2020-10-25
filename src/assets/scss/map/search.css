@@ -10,6 +10,7 @@
   --height: 5rem;
   --btn-width: 6rem;
   --bez: cubic-bezier(0, 0, 0.43, 1.49);
+  z-index: "1";
 }
 
 
@@ -17,7 +18,7 @@ iframe{
   width: 100%;
   height: 100%;
   display: flex;
-  
+  z-index: "1";
 }
 
 
@@ -29,6 +30,7 @@ form {
   top: 35%;
   left: 34%;
   border: 1px solid;
+  z-index: "1";
 }
 input, button {
   height: var(--height);
@@ -78,6 +80,7 @@ label {
 
 body {
   font-family: sans-serif;
+  z-index: "1";
 }
 
 input {
@@ -139,3 +142,4 @@ input {
 .suggestions li:not(:last-of-type) {
   border-bottom: 1px solid #999;
 }
+
