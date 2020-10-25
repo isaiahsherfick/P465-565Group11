@@ -6,6 +6,7 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import create_engine
 from flights import *
 from location import *
+import json
 
 # Adding the Heroku URL
 DB_URL = 'postgres://ugcuvkvpcdaixu:b624b6193c9e248af602f7239c6ddca6848239242adbcb31a9fd4685ac75aabf@ec2-204-236-228-169.compute-1.amazonaws.com:5432/d93me5889f2sp1'
@@ -35,17 +36,17 @@ class Itinerary( ) :
 
     # checking whether the id of the task is valid if it can be returned
     # else returning invalid statement.
-    def getTask( self , id ) :
+    def getTask( self , idx ) :
         if id > len( self.tasks ) :
-            return self.tasks[ id ]
+            return self.tasks[ idx ]
         else :
             return "Invalid Task"
 
     # checking whether the id of the task is valid if it can be removed
     # else printing error statement
-    def removeTask( self , id ) :
+    def removeTask( self , idx ) :
         if id > len( self.tasks ) :
-            self.tasks.pop( id )
+            self.tasks.pop( idx )
         else :
             print( "Invalid Task" )
 
@@ -73,11 +74,19 @@ class Itinerary( ) :
         for task in self.tasks:
             tasksAsSQLArray += (',\"' + task + '\"')
         tasksAsSQLArray = '{' + tasksAsSQLArray[1:] + '}'
-        connection.execute("INSERT INTO \"Itenerary\" values ({}, (\'{}\'));".format(self.ownerId, tasksAsSQLArray))
-        print("Made it here")
+        connection.execute( "INSERT INTO itinerary values ({}, (\'{}\'));".format( self.ownerId , tasksAsSQLArray ) )
+
+    # # assuming the itinerary to handle string to list manipulation
+    def initFromDB( self ) :
+        summary = connection.execute( "SELECT * FROM itinerary WHERE owner_id={}".format( self.ownerId ) ).fetchall( )
+        print( summary )
+        self.tasks = summary[ 1 ]
+
+    #For use when ownerID is not yet in the object
+    # def initFromDB( self , newOwnerId ) :
+    #     summary = connection.execute( "SELECT * FROM itinerary WHERE owner_id={}".format( newOwnerId ) ).fetchall( )
+    #     self.tasks = summary[ 1 ]
 
     # returning json object of the list of tasks
     def productJson( self ) :
-        # tasks = connection.execute( 'INSERT INTO "Itenerary" VALUES ("{%s}");' , ( input )  ).fetchall( )  )
-        # return jsonify( processTasks( self.tasks ) )
-        return jsonify( self.tasks )
+        return json.dumps( { "tasks" : self.tasks } )

@@ -6,5 +6,7 @@ from itinerary import *
 # from sqlalchemy import create_engine
 
 # sample testing
-a = Itinerary( 0 ,[ '10:00 AM Indy', '4:00PM LA', '6:30PM Denny' ] )
-a.saveItinerary()
+testing_obj = Itinerary( 0 ,[ '10:00 AM Indy', '4:00PM LA', '6:30PM Denny' ] )
+# testing_obj.saveItinerary( )
+testing_obj.initFromDB( )
+# print( testing_obj.productJson( ) )
