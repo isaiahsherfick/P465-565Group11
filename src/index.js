@@ -7,7 +7,7 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 //import './App.css';
-import './assets/scss/style.scss';
+//import './assets/scss/style.scss';
 
 const history = createBrowserHistory();
 
@@ -17,6 +17,7 @@ ReactDOM.render(
   </Router>,
   document.getElementById('root')
 );
+require('./assets/scss/style.scss');
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

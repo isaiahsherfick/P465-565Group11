@@ -42,7 +42,7 @@ const App = () => {
       children={() => (
         <Switch>
           <AppRoute exact path="/" component={Home} layout={LayoutDefault} />
-          <Route path="/login" component={Login}  />
+          <Route path="/login" component={Login} />
           {/* <Route path="/map-page" component={MapPage} layout={LayoutDefault} /> */}
           <Route path="/map-page" component={MapPage} />
           <Route exact path="/explore" component={Explore}/>
