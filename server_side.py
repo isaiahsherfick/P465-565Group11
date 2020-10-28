@@ -81,6 +81,11 @@ def city_attractions( ) :
     # returning the json object client_side wants
     return jsonify( input_city.generateExplore( ) )
 
+# @server.route( '/flights' , methods = [ 'POST' ] )
+# def flight_details( ) :
+#     flight = request.get_json( force = True )[ 'city' ]
+#
+
 # checks whether current file is running
 if __name__ == '__main__' :
     # debug = True makes it convenient by restarting the server whenever code is updated
