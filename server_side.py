@@ -3,6 +3,7 @@ from flask import Flask , render_template , url_for , redirect , request , sessi
 from flask_cors import CORS
 from location import *
 from flights import *
+from places import *
 from itinerary import *
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import create_engine
@@ -81,10 +82,21 @@ def city_attractions( ) :
     # returning the json object client_side wants
     return jsonify( input_city.generateExplore( ) )
 
-# @server.route( '/flights' , methods = [ 'POST' ] )
-# def flight_details( ) :
-#     flight = request.get_json( force = True )[ 'city' ]
-#
+# explore function for the post method
+@server.route( '/explore' , methods = [ 'POST' ] )
+def explore_details( ) :
+    # requesting the JSON data and showing it
+    requested_data = request.get_json( force = True )
+    # longitude and latitude access from the server
+    longitude = requested_data[ 'longitude' ]
+    latitude = requested_data[ 'latitude' ]
+    # intializing the places object with longitude and latitude
+    places_object = Place( latitude , longitude )
+    # keeping a standard 40km radius from the coordinate
+    places_object.initFromAPI( 40000 )
+    # returnin the json file with restaurants, attractions and hotels embedded in them
+    return jsonify( { 'restaurants' : places_object.getRestaurants( ) , 'attractions' : places_object.getAttractions( ) , 'hotels' : places_object.getHotels( ) } )
+
 
 # checks whether current file is running
 if __name__ == '__main__' :
