@@ -15,6 +15,8 @@ import LoginPage from "views/LoginPage/LoginPage.js";
 import MapPage from 'views/MapPage/MapPage.js'
 import Header from "./Header.js";
 import Explore from "../src/views/ExplorePage/Explore.js";
+import ExploreRestaurant from "../src/views/ExplorePage/ExploreRestaurant.js";
+import Itinerary from "../src/views/ItineraryPage/Itinerary.js";
 
 
 
@@ -32,6 +34,8 @@ ReactDOM.render(
       <Route exact path="/components" component={Components} />
       <Route exact  path="/" component={LoginPage} />
       <Route exact path="/explore" component={Explore}/>
+      <Route exact path="/explorerestaurant" component={ExploreRestaurant}/>
+      <Route exact path="/itinerary" component={Itinerary}/>
       {/* <Route path="/explore-page" component={ExplorePage} /> */}
     </Switch>
   </Router>,
