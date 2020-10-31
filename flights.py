@@ -10,7 +10,7 @@ import datetime , pytz
 DB_URL = 'postgres://ugcuvkvpcdaixu:b624b6193c9e248af602f7239c6ddca6848239242adbcb31a9fd4685ac75aabf@ec2-204-236-228-169.compute-1.amazonaws.com:5432/d93me5889f2sp1'
 # Building a connection to the database
 engine = create_engine( DB_URL )
-connection = engine.connect( )
+
 
 
 class Flight :
@@ -83,7 +83,9 @@ class Flight :
 
     # intialized the database by accessing the flight details for the respective id
     def initFromDatabase( self , id ) :
+        connection = engine.connect( )
         summary = connection.execute( "SELECT * FROM flights WHERE id=(%s);" , ( id ) ).fetchall( )[ -1 ]
+        connection.close( )
         self.setTakeOffTime( str( summary[ 0 ] ) )
         self.setStartCity( summary[ 1 ] )
         self.setEndCity( summary[ 3 ] )

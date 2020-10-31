@@ -10,7 +10,7 @@ DB_URL = 'postgres://ugcuvkvpcdaixu:b624b6193c9e248af602f7239c6ddca6848239242adb
 AUTH_KEY = 'AIzaSyCqflolF2b4aNNcyQs0XdbcoAFwtby7Muw'
 # Building a connection to the database
 engine = create_engine(DB_URL)
-connection = engine.connect()
+# connection = engine.connect()
 
 class Place():
     def __init__( self , latitude = -69420 , longitude = -69420 ) :

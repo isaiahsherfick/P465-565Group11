@@ -12,7 +12,7 @@ import json
 DB_URL = 'postgres://ugcuvkvpcdaixu:b624b6193c9e248af602f7239c6ddca6848239242adbcb31a9fd4685ac75aabf@ec2-204-236-228-169.compute-1.amazonaws.com:5432/d93me5889f2sp1'
 # Building a connection to the database
 engine = create_engine(DB_URL)
-connection = engine.connect()
+
 
 
 # Itinerary class to connect frontend to DB
@@ -74,12 +74,18 @@ class Itinerary( ) :
         for task in self.tasks[1] :
             tasksAsSQLArray += (',\"' + str( task ) + '\"')
         tasksAsSQLArray = '{' + tasksAsSQLArray[1:] + '}'
-        connection.execute( "INSERT INTO itinerary values ({}, (\'{}\'));".format( self.ownerId , tasksAsSQLArray ) )
+        #connection = engine.connect( )
+        with engine.connect() as connection:
+            connection.execute( "INSERT INTO itinerary values ({}, (\'{}\'));".format( self.ownerId , tasksAsSQLArray ) )
+        #connection.close( )
 
     # # assuming the itinerary to handle string to list manipulation
     def initFromDB( self ) :
-        summary = connection.execute( "SELECT * FROM itinerary WHERE owner_id={}".format( self.ownerId ) ).fetchall( )
-        connection.execute( "DELETE FROM itinerary WHERE owner_id={}".format( self.ownerId ) )
+        # connection = engine.connect( )
+        with engine.connect() as connection:
+            summary = connection.execute( "SELECT * FROM itinerary WHERE owner_id={}".format( self.ownerId ) ).fetchall( )
+            connection.execute( "DELETE FROM itinerary WHERE owner_id={}".format( self.ownerId ) )
+        # connection.close( )
         self.tasks = list( summary[ 0 ] )
 
     # returning json object of the list of tasks

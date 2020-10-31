@@ -10,8 +10,6 @@ from flights import *
 DB_URL = 'postgres://ugcuvkvpcdaixu:b624b6193c9e248af602f7239c6ddca6848239242adbcb31a9fd4685ac75aabf@ec2-204-236-228-169.compute-1.amazonaws.com:5432/d93me5889f2sp1'
 # Building a connection to the database
 engine = create_engine(DB_URL)
-connection = engine.connect()
-
 
 # City class to encapsulate city behavior for explore page
 class City():
@@ -99,6 +97,7 @@ class City():
         # SQL query tested on Heroku by Isaiah
         # since it belongs to a single row for now we just access the first element
         # and use its information to set the arguments
+        connection = engine.connect( )
         summary = connection.execute("SELECT * FROM locations WHERE type='city' AND name=(%s) ;", (cityName)).fetchall()[-1]
         # getting the attractions list as per the city input
         attractions_list = connection.execute("SELECT * FROM locations WHERE city=(%s)", (cityName)).fetchall()
@@ -107,7 +106,7 @@ class City():
         flight_summary = connection.execute(
             "SELECT id FROM flights WHERE startcity IN ( SELECT name FROM locations WHERE type='city' AND name=(%s) ) OR endcity IN ( SELECT name FROM locations WHERE type='city' AND name=(%s) ) ; " \
             , (cityName, cityName)).fetchall()[-1]
-
+        connection.close( )
         # iterating through ids in flight_summary
         for ids in flight_summary:
             new_flight = Flight()

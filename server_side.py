@@ -13,27 +13,17 @@ from flask_bcrypt import Bcrypt
 server = Flask(__name__,static_folder='./build' ,static_url_path='/')
 DB_URL = 'postgres://ugcuvkvpcdaixu:b624b6193c9e248af602f7239c6ddca6848239242adbcb31a9fd4685ac75aabf@ec2-204-236-228-169.compute-1.amazonaws.com:5432/d93me5889f2sp1'
 engine = create_engine( DB_URL )
-connection = engine.connect( )
+# connection = engine.connect( )
 server.config[ 'SQLALCHEMY_DATABASE_URI' ] = DB_URL
 server.config[ 'SQLALCHEMY_TRACK_MODIFICATIONS' ] = False
 bcrypt = Bcrypt( server )
 CORS( server )
-#
-# global connection
-#
-# def connect_function( ) :
-#     engine = create_engine( DB_URL )
-#     connection = engine.connect( )
-#     server.config[ 'SQLALCHEMY_DATABASE_URI' ] = DB_URL
-#     server.config[ 'SQLALCHEMY_TRACK_MODIFICATIONS' ] = False
-#     bcrypt = Bcrypt( server )
-#     CORS( server )
+
 
 # User registering function which posts the data
 @server.route( '/users/register' , methods = [ 'POST' ] )
 def register(  ) :
     # receiving the user name, email and password
-    #connect_function( )
 
     first_name = request.get_json( force = True )[ 'name' ]
     email = request.get_json( force = True )[ 'email' ]
@@ -49,11 +39,12 @@ def register(  ) :
     if not ( first_name and email and password ) :
         result = { 'status' : 'Failure' }
         return jsonify( result )
+    connection = engine.connect( )
     # allocating id to the user which already exists
     ids = len( connection.execute( 'SELECT * FROM users;' ).fetchall( ) )
     # adding user details to the database with encrypted database
     connection.execute( 'INSERT INTO users(id,name,username,password) VALUES(%s,%s,%s,%s);' , ( ids + 1 , first_name , email , password_hash ) )
-    connection.terminate( )
+    connection.close( )
     # sending a positive response to the frontend
     result = { 'status' : 'Success' }
     # returning json object
@@ -63,6 +54,8 @@ def register(  ) :
 @server.route( '/users/login' , methods = [ 'POST' ] )
 def login(  ) :
     # receiving the user email and password
+
+
     email = request.get_json( force = True )[ 'email' ]
     # and decrypting the password
     password = request.get_json( )[ 'password' ]
@@ -73,7 +66,9 @@ def login(  ) :
         return jsonify( result )
     # verification that the username and password matches as the one in database
     # and getting the hash from the database and encoding it to appropriate datatype
+    connection = engine.connect( )
     password_hash = connection.execute( 'SELECT * FROM users where username=(%s)' , ( email ) ).fetchall( )[ -1 ][ 3 ].encode( 'utf-8' )
+    connection.close( )
     if bcrypt.check_password_hash( password_hash , password ) :
         # Success in that case
         result = { 'status' : 'Login Success' }
