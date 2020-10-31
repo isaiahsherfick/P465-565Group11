@@ -263,7 +263,7 @@ export default class LoginForm extends Component{
 		require("./login/app.css")
 		require("./login/app.scss")
 		require("./login/_font.scss")
-		require("./login/_reset.scss")
+		//require("./login/_reset.scss")
 		require("./login/_variable.scss")
 		// require("../../assets/scss/login/app.css")
 		// require("../../assets/scss/login/app.scss")
