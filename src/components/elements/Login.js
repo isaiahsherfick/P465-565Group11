@@ -265,6 +265,11 @@ export default class LoginForm extends Component{
 		require("./login/_font.scss")
 		require("./login/_reset.scss")
 		require("./login/_variable.scss")
+		// require("../../assets/scss/login/app.css")
+		// require("../../assets/scss/login/app.scss")
+		// require("../../assets/scss/login/_font.scss")
+		// require("../../assets/scss/login/_reset.scss")
+		// require("../../assets/scss/login/_variable.scss")
 
 		const {isLogin, user, error,message} = this.state;
 	
