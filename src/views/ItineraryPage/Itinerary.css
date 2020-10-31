@@ -1,0 +1,24 @@
+.heroImage{
+    width: 400px;
+    height: 400px;
+    padding: 20px;
+}
+
+.notes{
+    margin: 10% auto;
+    width: 50%;
+    background: lightblue;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.notes li{
+    text-align: left;
+    padding: 20px
+}
+
+.container{
+    margin-top: 10%;
+}
