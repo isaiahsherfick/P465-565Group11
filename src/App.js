@@ -13,6 +13,9 @@ import Login from './components/elements/Login';
 import MapPage from './components/elements/MapPage';
 import Search from './components/elements/Search';
 import Explore from "./components/elements/Explore";
+import ExploreRestaurant from "./components/elements/ExploreRestaurant";
+import Itinerary from "./components/elements/Itinerary";
+
 
 // Initialize Google Analytics
 ReactGA.initialize(process.env.REACT_APP_GA_CODE);
@@ -47,6 +50,8 @@ const App = () => {
           {/* <Route path="/map-page" component={MapPage} layout={LayoutDefault} /> */}
           <Route path="/search" component={Search} />
           <Route exact path="/explore" component={Explore}/>
+          <Route exact path="/itinerary" component={Itinerary}/>
+          <Route exact path="/explorerestaurants" component={ExploreRestaurant}/>
         </Switch>
       )} />
   );

@@ -12,7 +12,7 @@ export default class Header extends React.Component{
             <Link className="logo">Roadmapper</Link>
             <ul>
                 <li><Link>User information</Link></li>
-                <li><Link>Itenary</Link></li>
+                <li><Link to="/Itinerary">Itinerary</Link></li>
                 <li><Link to="/">Logout</Link></li>
             </ul>
             </nav>

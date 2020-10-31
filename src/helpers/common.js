@@ -9,7 +9,6 @@ export const getExploreData = () => {
 }
 
 
-
 export const setSearchData = (lat,lng) => {
   sessionStorage.setItem('latitude', JSON.stringify(lat));
   sessionStorage.setItem('longitude', JSON.stringify(lng));
