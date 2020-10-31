@@ -28,7 +28,7 @@ class Itinerary( ) :
 
     # adding a task to a preexisting list of tasks
     def appendTask( self , task ) :
-        self.tasks += task ,
+        self.tasks[ 1 ] += task ,
 
     # returning the list of tasks
     def getTasks( self ) :
@@ -71,21 +71,16 @@ class Itinerary( ) :
     # the itinerary comprising of all the tasks for a respective user id
     def saveItinerary( self ) :
         tasksAsSQLArray = ''
-        for task in self.tasks:
-            tasksAsSQLArray += (',\"' + task + '\"')
+        for task in self.tasks[1] :
+            tasksAsSQLArray += (',\"' + str( task ) + '\"')
         tasksAsSQLArray = '{' + tasksAsSQLArray[1:] + '}'
         connection.execute( "INSERT INTO itinerary values ({}, (\'{}\'));".format( self.ownerId , tasksAsSQLArray ) )
 
     # # assuming the itinerary to handle string to list manipulation
     def initFromDB( self ) :
         summary = connection.execute( "SELECT * FROM itinerary WHERE owner_id={}".format( self.ownerId ) ).fetchall( )
-        print( summary )
-        self.tasks = summary[ 1 ]
-
-    #For use when ownerID is not yet in the object
-    # def initFromDB( self , newOwnerId ) :
-    #     summary = connection.execute( "SELECT * FROM itinerary WHERE owner_id={}".format( newOwnerId ) ).fetchall( )
-    #     self.tasks = summary[ 1 ]
+        connection.execute( "DELETE FROM itinerary WHERE owner_id={}".format( self.ownerId ) )
+        self.tasks = list( summary[ 0 ] )
 
     # returning json object of the list of tasks
     def productJson( self ) :

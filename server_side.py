@@ -17,12 +17,24 @@ connection = engine.connect( )
 server.config[ 'SQLALCHEMY_DATABASE_URI' ] = DB_URL
 server.config[ 'SQLALCHEMY_TRACK_MODIFICATIONS' ] = False
 bcrypt = Bcrypt( server )
-CORS(server)
+CORS( server )
+#
+# global connection
+#
+# def connect_function( ) :
+#     engine = create_engine( DB_URL )
+#     connection = engine.connect( )
+#     server.config[ 'SQLALCHEMY_DATABASE_URI' ] = DB_URL
+#     server.config[ 'SQLALCHEMY_TRACK_MODIFICATIONS' ] = False
+#     bcrypt = Bcrypt( server )
+#     CORS( server )
 
 # User registering function which posts the data
 @server.route( '/users/register' , methods = [ 'POST' ] )
 def register(  ) :
     # receiving the user name, email and password
+    #connect_function( )
+
     first_name = request.get_json( force = True )[ 'name' ]
     email = request.get_json( force = True )[ 'email' ]
     # and decrypting the password
@@ -41,6 +53,7 @@ def register(  ) :
     ids = len( connection.execute( 'SELECT * FROM users;' ).fetchall( ) )
     # adding user details to the database with encrypted database
     connection.execute( 'INSERT INTO users(id,name,username,password) VALUES(%s,%s,%s,%s);' , ( ids + 1 , first_name , email , password_hash ) )
+    connection.terminate( )
     # sending a positive response to the frontend
     result = { 'status' : 'Success' }
     # returning json object
@@ -97,6 +110,16 @@ def explore_details( ) :
     # returnin the json file with restaurants, attractions and hotels embedded in them
     return jsonify( { 'restaurants' : places_object.getRestaurants( ) , 'attractions' : places_object.getAttractions( ) , 'hotels' : places_object.getHotels( ) } )
 
+@server.route( '/addToItinerary' , methods = [ 'POST' ] )
+def addingDetailsToItinerary( ) :
+    # requesting the JSON data and showing it
+    requested_data = request.get_json( force = True )
+    # itinerary details from the client side
+    itinerary_object = Itinerary( ownerId = requested_data[ "userId" ] )
+    itinerary_object.initFromDB( )
+    itinerary_object.appendTask( requested_data[ "name" ] )
+    itinerary_object.saveItinerary( )
+    return itinerary_object.productJson( )
 
 # checks whether current file is running
 if __name__ == '__main__' :
