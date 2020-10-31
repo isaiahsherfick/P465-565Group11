@@ -11,6 +11,7 @@ import LayoutDefault from './layouts/LayoutDefault';
 import Home from './views/Home';
 import Login from './components/elements/Login';
 import MapPage from './components/elements/MapPage';
+import Search from './components/elements/Search';
 import Explore from "./components/elements/Explore";
 
 // Initialize Google Analytics
@@ -44,7 +45,7 @@ const App = () => {
           <AppRoute exact path="/" component={Home} layout={LayoutDefault} />
           <Route path="/login" component={Login} />
           {/* <Route path="/map-page" component={MapPage} layout={LayoutDefault} /> */}
-          <Route path="/map-page" component={MapPage} />
+          <Route path="/search" component={Search} />
           <Route exact path="/explore" component={Explore}/>
         </Switch>
       )} />

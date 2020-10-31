@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 //function Header() {
 export default class Header extends React.Component{
     render(){
-        require('../../assets/scss/header/Header.css')
+        require('./Header.css')
         return (
             <nav className="nav1">
             <Link className="logo">Roadmapper</Link>

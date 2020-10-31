@@ -200,7 +200,7 @@ export default class LoginForm extends Component{
 										message: 'Login successful.'
 									}
 								});
-								this.props.history.push('/map-page')
+								this.props.history.push('/search')
 							}
 							else{
 								this.setState({
@@ -260,11 +260,11 @@ export default class LoginForm extends Component{
 
 	}
 	render(){
-		require("../../assets/scss/login/app.css")
-		require("../../assets/scss/login/app.scss")
-		require("../../assets/scss/login/_font.scss")
-		require("../../assets/scss/login/_reset.scss")
-		require("../../assets/scss/login/_variable.scss")
+		require("./login/app.css")
+		require("./login/app.scss")
+		require("./login/_font.scss")
+		require("./login/_reset.scss")
+		require("./login/_variable.scss")
 
 		const {isLogin, user, error,message} = this.state;
 	

@@ -4,7 +4,7 @@ import React from 'react';
 //const Header2 = () => {
 export default class Header2 extends React.Component{
     render(){
-        require('../../assets/scss/header/Header2.scss')
+        require('./Header2.scss')
         return (
             <nav className="nav2">
             <ul class="menuItems">

@@ -25,10 +25,11 @@ export default class Explore extends React.Component{
     //     "https://image.shutterstock.com/image-photo/micro-peacock-feather-hd-imagebest-260nw-1127238584.jpg"
     // ]
     // }
-        //const cityData = getExploreData()
-        //console.log("raass",cityData)
+        const cityData = getExploreData()
+        console.log("raass explore data",cityData)
+
         //const [data] = useState(cityData);
-        require("../../assets/scss/explore/Explore.css")
+        require("./Explore.css")
    
         return (
             <div style={{marginTop: "2%"}}>
