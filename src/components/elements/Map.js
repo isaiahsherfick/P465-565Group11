@@ -8,6 +8,7 @@ import { setExploreData } from '../../helpers/common';
 import { GoogleMapsAPI } from '../../helpers/client-config';
 import { getLatitude } from '../../helpers/common';
 import { getLongitude } from '../../helpers/common';
+import { setCityData } from '../../helpers/common';
 import axios from 'axios';
 
 Geocode.setApiKey( GoogleMapsAPI );
@@ -90,6 +91,7 @@ class Map extends Component{
 		for( let i = 0; i < addressArray.length; i++ ) {
 			if ( addressArray[ i ].types[0] && 'administrative_area_level_2' === addressArray[ i ].types[0] ) {
 				city = addressArray[ i ].long_name;
+				setCityData(city);
 				return city;
 			}
 		}

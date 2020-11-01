@@ -3,28 +3,28 @@
 @import "variable";
 @import "font";
 
-body {
-  //font-family: 'Open Sans', sans-serif;
-  //background: $primary-color;
-  //background-image: url(../../../assets/images/login_bg.jpg);
-  //background-repeat: no-repeat;
-  //background-size: 1020px 637px;
-  background: url(../../../assets/images/login_bg.jpg) no-repeat center center fixed; 
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
+// body {
+//   //font-family: 'Open Sans', sans-serif;
+//   //background: $primary-color;
+//   //background-image: url(../../../assets/images/login_bg.jpg);
+//   //background-repeat: no-repeat;
+//   //background-size: 1020px 637px;
+//   background: url(../../../assets/images/login_bg.jpg) no-repeat center center fixed; 
+//   -webkit-background-size: cover;
+//   -moz-background-size: cover;
+//   -o-background-size: cover;
+//   background-size: cover;
 
-  //color: $body-text-color;
-  //font-size: 13px;
-}
-a{
-  color: $primary-color;
-  text-decoration: none;
-}
-* {
-  box-sizing: border-box;
-}
+//   //color: $body-text-color;
+//   //font-size: 13px;
+// }
+// a{
+//   color: $primary-color;
+//   text-decoration: none;
+// }
+// * {
+//   box-sizing: border-box;
+// }
 
 .app-layout {
   max-width: 1000px;
