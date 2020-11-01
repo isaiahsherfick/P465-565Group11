@@ -260,16 +260,9 @@ export default class LoginForm extends Component{
 
 	}
 	render(){
-		require("./login/app.css")
+
 		require("./login/app.scss")
-		require("./login/_font.scss")
-		//require("./login/_reset.scss")
-		require("./login/_variable.scss")
-		// require("../../assets/scss/login/app.css")
-		// require("../../assets/scss/login/app.scss")
-		// require("../../assets/scss/login/_font.scss")
-		// require("../../assets/scss/login/_reset.scss")
-		// require("../../assets/scss/login/_variable.scss")
+
 
 		const {isLogin, user, error,message} = this.state;
 	
@@ -282,7 +275,7 @@ export default class LoginForm extends Component{
 					<div className="app-login-form-inner">
 							<Link to = "/">
 							<button onClick="handleClose" className="app-dismiss-button">Close</button></Link>
-							<h2 className="form-title" style={{color:"GrayText"}} >{title}</h2>
+							<h2 id="login" className="form-title" style={{color:"GrayText"}} >{title}</h2>
 							<form onSubmit={this._onSubmit}>
 
 								{
