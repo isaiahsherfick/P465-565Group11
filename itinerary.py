@@ -28,7 +28,7 @@ class Itinerary( ) :
 
     # adding a task to a preexisting list of tasks
     def appendTask( self , task ) :
-        self.tasks[ 1 ] += task ,
+        self.tasks += task ,
 
     # returning the list of tasks
     def getTasks( self ) :
@@ -70,14 +70,16 @@ class Itinerary( ) :
 
     # the itinerary comprising of all the tasks for a respective user id
     def saveItinerary( self ) :
-        tasksAsSQLArray = ''
-        for task in self.tasks[1] :
-            tasksAsSQLArray += (',\"' + str( task ) + '\"')
-        tasksAsSQLArray = '{' + tasksAsSQLArray[1:] + '}'
-        #connection = engine.connect( )
-        with engine.connect() as connection:
-            connection.execute( "INSERT INTO itinerary values ({}, (\'{}\'));".format( self.ownerId , tasksAsSQLArray ) )
-        #connection.close( )
+        if not self.tasks :
+            with engine.connect() as connection:
+                connection.execute( "INSERT INTO itinerary values ( {} , \'{}\');".format( self.ownerId , "{}" ) )
+        else :
+            tasksAsSQLArray = ''
+            for task in self.tasks :
+                tasksAsSQLArray += (',\"' + str( task ) + '\"')
+            tasksAsSQLArray = '{' + tasksAsSQLArray[ 1: ] + '}'
+            with engine.connect() as connection:
+                connection.execute( "INSERT INTO itinerary values ({}, (\'{}\'));".format( self.ownerId , tasksAsSQLArray ) )
 
     # # assuming the itinerary to handle string to list manipulation
     def initFromDBinsert( self ) :
@@ -86,15 +88,14 @@ class Itinerary( ) :
             summary = connection.execute( "SELECT * FROM itinerary WHERE owner_id={}".format( self.ownerId ) ).fetchall( )
             connection.execute( "DELETE FROM itinerary WHERE owner_id={}".format( self.ownerId ) )
         # connection.close( )
-        self.tasks = list( summary[ 0 ] )
+        self.tasks = list( summary[ 0 ][ 1 ] ) if summary else [ ]
 
     def initFromDBdisplay( self ) :
         # connection = engine.connect( )
         with engine.connect() as connection:
             summary = connection.execute( "SELECT * FROM itinerary WHERE owner_id={}".format( self.ownerId ) ).fetchall( )
         # connection.close( )
-        self.tasks = list( summary[ 0 ] ) if summary else None
-
+        self.tasks = list( summary[ 0 ] ) if summary else [ ]
 
     # returning json object of the list of tasks
     def productJson( self ) :

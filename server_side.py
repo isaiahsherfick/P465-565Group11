@@ -124,6 +124,17 @@ def addingDetailsToItinerary( ) :
     itinerary_object.saveItinerary( )
     return itinerary_object.productJson( )
 
+@server.route( '/removeFromItinerary' , methods = [ 'POST' ] )
+def removeFromItinerary( ) :
+    # requesting the JSON data and showing it
+    requested_data = request.get_json( force = True )
+    # itinerary details from the client side
+    itinerary_object = Itinerary( ownerId = requested_data[ "userId" ] )
+    itinerary_object.initFromDBinsert( )
+    itinerary_object.removeTask( requested_data[ "name" ] )
+    itinerary_object.saveItinerary( )
+    return itinerary_object.productJson( )
+
 @server.route( '/retrieveItinerary' , methods = [ 'POST' ] )
 def retrieveItinerary( ) :
     # requesting the JSON data and showing it
