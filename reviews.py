@@ -12,8 +12,6 @@ import json
 DB_URL = 'postgres://ugcuvkvpcdaixu:b624b6193c9e248af602f7239c6ddca6848239242adbcb31a9fd4685ac75aabf@ec2-204-236-228-169.compute-1.amazonaws.com:5432/d93me5889f2sp1'
 # Building a connection to the database
 engine = create_engine(DB_URL)
-connection = engine.connect()
-
 
 class Review( ):
 
@@ -76,7 +74,9 @@ class Review( ):
 
         # intializing database as per the review id as per input
         def initFromDatabase( self , review_id ) :
+            connection = engine.connect( )
             reviews = connection.execute("select * from reviews where review_id={}".format( review_id ) ).fetchall( )[ 0 ]
+            connection.close( )
             self.review_id = reviews[ 0 ]
             self.owner_id = reviews[ 1 ]
             self.unique_location_key = reviews[ 2 ]
@@ -89,7 +89,9 @@ class Review( ):
         # getting the average rating and the reviews of all the object reviews
         def gatherReviews( self , unique_location_key ) :
             total_stars_out_of_five , objs = 0 , 0
+            connection = engine.connect( )
             review_ids = connection.execute( "select review_id from reviews where unique_location_key='{}';".format( unique_location_key ) ).fetchall(  )
+            connection.close( )
             review_ids = [ ids[ 0 ] for ids in review_ids ]
             reviews_json = { }
             for id in review_ids :

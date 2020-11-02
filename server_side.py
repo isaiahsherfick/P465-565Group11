@@ -39,7 +39,12 @@ def register(  ) :
     if not ( first_name and email and password ) :
         result = { 'status' : 'Failure' }
         return jsonify( result )
+    # building a connection
     connection = engine.connect( )
+    # checking the connection if the email already exists
+    if connection.execute( "SELECT * FROM users where username=(%s)" , ( email ) ).fetchall( ) :
+        result = { 'status' : 'Email already exists' }
+        return jsonify( result )
     # allocating id to the user which already exists
     ids = len( connection.execute( 'SELECT * FROM users;' ).fetchall( ) )
     # adding user details to the database with encrypted database
@@ -54,8 +59,6 @@ def register(  ) :
 @server.route( '/users/login' , methods = [ 'POST' ] )
 def login(  ) :
     # receiving the user email and password
-
-
     email = request.get_json( force = True )[ 'email' ]
     # and decrypting the password
     password = request.get_json( )[ 'password' ]
@@ -67,11 +70,16 @@ def login(  ) :
     # verification that the username and password matches as the one in database
     # and getting the hash from the database and encoding it to appropriate datatype
     connection = engine.connect( )
-    password_hash = connection.execute( 'SELECT * FROM users where username=(%s)' , ( email ) ).fetchall( )[ -1 ][ 3 ].encode( 'utf-8' )
+    retrieved_data = connection.execute( 'SELECT * FROM users where username=(%s)' , ( email ) ).fetchall( )[ -1 ]#[ 3 ].encode( 'utf-8' )
+    # getting the user details to be sent to the client_side
+    user_id = retrieved_data[ 0 ]
+    user_name = retrieved_data[ 1 ]
+    user_email = retrieved_data[ 2 ]
+    password_hash = retrieved_data[ 3 ].encode( 'utf-8' )
     connection.close( )
     if bcrypt.check_password_hash( password_hash , password ) :
         # Success in that case
-        result = { 'status' : 'Login Success' }
+        result = { 'status' : 'Login Success' , "user_id" : user_id , "name" : user_name , "email" : email }
     else :
         # otherwise writing wrong username or password
         result = { 'status' : 'Incorrect Username or Password' }
@@ -111,10 +119,28 @@ def addingDetailsToItinerary( ) :
     requested_data = request.get_json( force = True )
     # itinerary details from the client side
     itinerary_object = Itinerary( ownerId = requested_data[ "userId" ] )
-    itinerary_object.initFromDB( )
+    itinerary_object.initFromDBinsert( )
     itinerary_object.appendTask( requested_data[ "name" ] )
     itinerary_object.saveItinerary( )
     return itinerary_object.productJson( )
+
+@server.route( '/retrieveItinerary' , methods = [ 'POST' ] )
+def retrieveItinerary( ) :
+    # requesting the JSON data and showing it
+    requested_data = request.get_json( force = True )
+    # itinerary details from the client side
+    itinerary_object = Itinerary( ownerId = requested_data[ "userId" ] )
+    itinerary_object.initFromDBdisplay( )
+    #itinerary_object.appendTask( requested_data[ "name" ] )
+    #itinerary_object.saveItinerary( )
+    return itinerary_object.productJson( )
+
+# @server.route( '/review' , methods = [ 'POST' ] )
+# def customerReview( ) :
+#     # requesting the JSON data and showing it
+#     requested_data = request.get_json( force = True )
+#     review_object = Review( )
+#     review_object.
 
 # checks whether current file is running
 if __name__ == '__main__' :

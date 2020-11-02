@@ -80,13 +80,21 @@ class Itinerary( ) :
         #connection.close( )
 
     # # assuming the itinerary to handle string to list manipulation
-    def initFromDB( self ) :
+    def initFromDBinsert( self ) :
         # connection = engine.connect( )
         with engine.connect() as connection:
             summary = connection.execute( "SELECT * FROM itinerary WHERE owner_id={}".format( self.ownerId ) ).fetchall( )
             connection.execute( "DELETE FROM itinerary WHERE owner_id={}".format( self.ownerId ) )
         # connection.close( )
         self.tasks = list( summary[ 0 ] )
+
+    def initFromDBdisplay( self ) :
+        # connection = engine.connect( )
+        with engine.connect() as connection:
+            summary = connection.execute( "SELECT * FROM itinerary WHERE owner_id={}".format( self.ownerId ) ).fetchall( )
+        # connection.close( )
+        self.tasks = list( summary[ 0 ] ) if summary else None
+
 
     # returning json object of the list of tasks
     def productJson( self ) :
