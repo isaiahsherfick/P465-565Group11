@@ -91,7 +91,6 @@ class Map extends Component{
 		for( let i = 0; i < addressArray.length; i++ ) {
 			if ( addressArray[ i ].types[0] && 'administrative_area_level_2' === addressArray[ i ].types[0] ) {
 				city = addressArray[ i ].long_name;
-				setCityData(city);
 				return city;
 			}
 		}
@@ -283,6 +282,7 @@ class Map extends Component{
 		let map;
 		if( this.props.center.lat !== undefined ) {
 			setSearchData(this.state.mapPosition.lat, this.state.mapPosition.lng)
+			setCityData(this.state.area)
 			// this.props.history.push('/explore')
 			//window.location = '/explore'
 			map = <div>

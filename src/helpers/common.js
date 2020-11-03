@@ -1,5 +1,5 @@
 export const setCityData = (cityData) => {
-  sessionStorage.setItem('exploreData', JSON.stringify(cityData));
+  sessionStorage.setItem('cityData', JSON.stringify(cityData));
 }
 
 export const getCityData = () => {
@@ -14,8 +14,8 @@ export const setExploreData = (exploreData) => {
   }
 
 export const getExploreData = () => {
-    const userStr = sessionStorage.getItem('exploreData');
-    if (userStr) return JSON.parse(userStr);
+    const exploreStr = sessionStorage.getItem('exploreData');
+    if (exploreStr) return JSON.parse(exploreStr);
     else return null;
 }
 
@@ -37,4 +37,29 @@ export const getLongitude = () => {
   else return null;
 }
 
+export const setUserId = (userId) => {
+  sessionStorage.setItem('userId', JSON.stringify(userId));
+}
 
+export const getUserId= () => {
+  const userIdStr = sessionStorage.getItem('userId');
+  if (userIdStr) return JSON.parse(userIdStr);
+  else return null;
+}
+
+export const removeUserSession = () => {
+  //sessionStorage.removeItem('token');
+  sessionStorage.removeItem('userId');
+  sessionStorage.removeItem('username');
+
+}
+
+export const setUsername = (username) => {
+  sessionStorage.setItem('username', JSON.stringify(username));
+}
+
+export const getUsername= () => {
+  const usernameStr = sessionStorage.getItem('username');
+  if (usernameStr) return JSON.parse(usernameStr);
+  else return null;
+}

@@ -3,6 +3,8 @@ import { useLocation, Switch, Route } from 'react-router-dom';
 import AppRoute from './utils/AppRoute';
 import ScrollReveal from './utils/ScrollReveal';
 import ReactGA from 'react-ga';
+//import ProtectedRoute from "./utils/ProtectedRoute";
+import {ProtectedRoute} from "./utils/ProtectedRoute";
 
 // Layouts
 import LayoutDefault from './layouts/LayoutDefault';

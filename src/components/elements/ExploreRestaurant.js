@@ -28,6 +28,7 @@ const Explore = () => {
                         // name:  JSON.stringify(myData.name),
                         name: myData.name,
                         userId: "1"
+
                     })
                 })
                 .then(res => res.json())
@@ -39,11 +40,13 @@ const Explore = () => {
              
 
              var apiKey = "AIzaSyCqflolF2b4aNNcyQs0XdbcoAFwtby7Muw";      
-             var str1 = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${placeId}&key=${apiKey}`;
+            //  var str1 = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${placeId}&key=${apiKey}`;
                 
              var photo_reference_goes_here = cityData.attractions.results[0]['photos'][0]['photo_reference']
              var str1 = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${photo_reference_goes_here}&key=AIzaSyANxvSPyPXr2rMPMSUjCqvBQ6_PS2cOs3Q`; 
         
+console.log(photo_reference_goes_here, "<== city data" )
+
              
              
              const renderData = 
@@ -53,10 +56,11 @@ const Explore = () => {
                          <p>{result.name} </p>
                          <p>{result.rating}</p>
                          <p>{result.vicinity}</p>
+                
                          <p onClick={() => addJson(result)}> <a href={"#"}>Add to Itinerary</a> </p>
-        
+        <img style={{display:"unset"}} src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${result.photos[0].photo_reference}&key=AIzaSyANxvSPyPXr2rMPMSUjCqvBQ6_PS2cOs3Q`}/>
                          {/* <img src={str1} /> */}
-                         <img src='https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&amp;photoreference={{result.photos[0].photo_reference}}&amp;key=AIzaSyANxvSPyPXr2rMPMSUjCqvBQ6_PS2cOs3Q'/>
+                         {/* <img src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&amp;photoreference=${result.photos[0].photo_reference}&amp;key=AIzaSyCqflolF2b4aNNcyQs0XdbcoAFwtby7Muw`}/> */}
                          </div>
                  ))
              

@@ -118,7 +118,7 @@ const FeaturesTiles = ({
                     Itenary
                     </h4>
                   <p className="m-0 text-sm">
-                    Save and comment on your itenary.
+                    Save and comment on your Itinerary.
                     </p>
                 </div>
               </div>

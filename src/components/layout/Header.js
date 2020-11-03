@@ -107,7 +107,7 @@ const Header = ({
                   <span className="hamburger-inner"></span>
                 </span>
               </button>
-              <nav
+              <nav style={{background: "none"}}
                 ref={nav}
                 className={
                   classNames(

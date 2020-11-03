@@ -1,19 +1,28 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 //import '../../assets/scss/header/Header.css';
-
+import { removeUserSession } from '../../helpers/common';
+import { getUsername } from '../../helpers/common';
 
 //function Header() {
 export default class Header extends React.Component{
+
     render(){
+        // const name = getUsername()
+        // const [Username] = useState(name)
         require('./Header.css')
         return (
             <nav className="nav1">
-            <Link className="logo">Roadmapper</Link>
+            <Link to="/search" className="logo">Roadmapper</Link>
             <ul>
-                <li><Link>User information</Link></li>
+                <li><Link>Hi, {getUsername()}</Link></li>
                 <li><Link to="/Itinerary">Itinerary</Link></li>
-                <li><Link to="/">Logout</Link></li>
+                <li><Link onClick={() => 
+                    {     removeUserSession();
+                            //this.props.history.push("/");
+                            window.location = "/"
+                                    }}> 
+                Logout</Link></li>
             </ul>
             </nav>
         )

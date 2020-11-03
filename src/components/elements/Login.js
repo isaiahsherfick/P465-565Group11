@@ -14,6 +14,8 @@ import GoogleLogin from 'react-google-login';
 import _ from 'lodash';
 import {isEmail} from '../../helpers/email';
 import {createUser, login} from '../../helpers/user';
+import { setUserId } from '../../helpers/common';
+import { setUsername } from '../../helpers/common';
 import { Link } from 'react-router-dom';
 
 export default class LoginForm extends Component{
@@ -200,6 +202,8 @@ export default class LoginForm extends Component{
 										message: 'Login successful.'
 									}
 								});
+								setUserId(response.data.user_Id)
+								setUsername(response.data.name)
 								this.props.history.push('/search')
 							}
 							else{

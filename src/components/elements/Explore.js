@@ -29,6 +29,8 @@ export default class Explore extends React.Component{
         const cityData = getExploreData()
         console.log("raass explore data",cityData)
         const cityname = getCityData()
+        console.group("ras city name",cityname)
+        //const [Cityname] = useState(cityname);
 
         //const [data] = useState(cityData);
         require("./Explore.css")

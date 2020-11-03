@@ -1,7 +1,9 @@
 import Header2 from './Header2';
+import Header from './Header'
 import React, {useState} from 'react'
 import './Itinerary.css'
-
+import { getUsername } from '../../helpers/common';
+//import Header from '../layout/Header';
 
 
  const data = [(0,['10:00AM Indianapolis airport', '2:00PM Los Angeles', '4:30PM Check in at Mariott', '8:00 Dinner'])]
@@ -10,10 +12,13 @@ import './Itinerary.css'
 function Itinerary() {
   const myData = ['10:00AM Indianapolis airport', '2:00PM Los Angeles', '4:30PM Check in at Mariott', '8:00 Dinner']  
   const [notes, setNotes] = useState(myData)
+  const name = getUsername()
+  const [Username] = useState(name)
   return (
     <div className="container">
+      <Header/>
       <Header2 /> 
-      <h1> Welcome to your Itinerary, Mike </h1>
+      <h1> Welcome to your Itinerary, {Username} </h1>
   <ul className="notes">{notes.map((note) => <li>{note}</li>)}</ul>
   </div>
 )
