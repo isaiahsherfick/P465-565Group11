@@ -2,6 +2,7 @@ import Header2 from './Header2';
 import Header from "./Header";
 import React, {useState} from 'react';
 import { getExploreData } from '../../helpers/common';
+import { getCityData } from '../../helpers/common';
 //import './Explore.css'
 
 //const Explore = () => {
@@ -27,6 +28,7 @@ export default class Explore extends React.Component{
     // }
         const cityData = getExploreData()
         console.log("raass explore data",cityData)
+        const cityname = getCityData()
 
         //const [data] = useState(cityData);
         require("./Explore.css")
@@ -35,7 +37,7 @@ export default class Explore extends React.Component{
             <div style={{marginTop: "2%"}}>
                 <Header/>
                 <Header2 />
-                <h1 id="city">{this.cityData.city}</h1>
+                <h1 id="city">{cityname}</h1>
        {
         this.cityData.images.map(image => ( <img className="heroImage" style={{display:"inline-grid"}} src={image} alt="test image"></img>))
        }

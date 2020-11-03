@@ -47,7 +47,7 @@ export default class MapPage extends React.Component{
       this.setState({ name: event.target.value});
     }
     render(){
-      require("./search.css")
+      //require("./search.css")
 
       return (
           <div>

@@ -1,3 +1,14 @@
+export const setCityData = (cityData) => {
+  sessionStorage.setItem('exploreData', JSON.stringify(cityData));
+}
+
+export const getCityData = () => {
+  const userStr = sessionStorage.getItem('cityData');
+  if (userStr) return JSON.parse(userStr);
+  else return null;
+}
+
+
 export const setExploreData = (exploreData) => {
     sessionStorage.setItem('exploreData', JSON.stringify(exploreData));
   }
