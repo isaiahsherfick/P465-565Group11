@@ -8,6 +8,12 @@ export const getExploreData = () => {
     else return null;
 }
 
+export const getItinerary = () => {
+  const userStr = sessionStorage.getItem('Itinerary');
+  if (userStr) return JSON.parse(userStr);
+  else return null;
+}
+
 
 export const setSearchData = (lat,lng) => {
   sessionStorage.setItem('latitude', JSON.stringify(lat));

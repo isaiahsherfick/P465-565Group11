@@ -13,7 +13,7 @@ const Explore = () => {
     
 
 
-             const [myData, setMyData] = useState(cityData.restaurants)
+             const [myData, setMyData] = useState(cityData.hotels)
 
              let placeId = "" 
              const addJson = (myData) => {
@@ -28,7 +28,6 @@ const Explore = () => {
                         // name:  JSON.stringify(myData.name),
                         name: myData.name,
                         userId: "1"
-                        
 
                     })
                 })
@@ -38,14 +37,12 @@ const Explore = () => {
                 .catch(err => console.log(err, "Unable to Post!"))
                 }
 
-                
-
              
 
              var apiKey = "AIzaSyCqflolF2b4aNNcyQs0XdbcoAFwtby7Muw";      
             //  var str1 = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${placeId}&key=${apiKey}`;
                 
-             var photo_reference_goes_here = cityData.restaurants.results[0]['photos'][0]['photo_reference']
+             var photo_reference_goes_here = cityData.hotels.results[0]['photos'][0]['photo_reference']
              var str1 = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${photo_reference_goes_here}&key=AIzaSyANxvSPyPXr2rMPMSUjCqvBQ6_PS2cOs3Q`; 
         
 console.log(photo_reference_goes_here, "<== city data" )
