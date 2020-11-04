@@ -54,11 +54,11 @@ const App = () => {
           <Route exact path="/login" component={Login} />
           {/* <Route path="/map-page" component={MapPage} layout={LayoutDefault} /> */}
           <Route exact path="/search" component={Search} />
-          <ProtectedRoute exact path="/explore" component={Explore}/>
-          <ProtectedRoute exact path="/itinerary" component={Itinerary}/>
-          <ProtectedRoute exact path="/restaurants" component={ExploreRestaurant}/>
-          <ProtectedRoute exact path="/hotels" component={ExploreHotel}/>
-          <ProtectedRoute exact path="/attractions" component={ExploreAttraction}/>
+          <Route exact path="/explore" component={Explore}/>
+          <Route exact path="/itinerary" component={Itinerary}/>
+          <Route exact path="/restaurants" component={ExploreRestaurant}/>
+          <Route exact path="/hotels" component={ExploreHotel}/>
+          <Route exact path="/attractions" component={ExploreAttraction}/>
 
         </Switch>
       )} />
