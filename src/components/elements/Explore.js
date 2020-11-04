@@ -11,9 +11,9 @@ export default class Explore extends React.Component{
         super()
   
         this.cityData = { city: "Chicago", 
-        images: ["https://images.pexels.com/photos/1236701/pexels-photo-1236701.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-        "https://i.pinimg.com/236x/39/9a/42/399a42619d2ac5e1b648bd5c69d2a361.jpg",
-        "https://image.shutterstock.com/image-photo/micro-peacock-feather-hd-imagebest-260nw-1127238584.jpg"
+        images: ["https://miro.medium.com/max/2000/1*siqenXUFvg4iinAWF7o-ow.jpeg",
+        "https://www.momondo.com/discover/wp-content/uploads/sites/260/2019/04/119a0ce5-bf97-3674-9c1d-03addd0c1a86.jpg",
+        "https://ssl.tzoo-img.com/images/tzoo.1.0.570478.C-astMinuteVacations-Tulum-iStock-136559958.jpg?width=1080"
     ]
     }
 

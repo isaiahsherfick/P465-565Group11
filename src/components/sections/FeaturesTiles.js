@@ -115,7 +115,7 @@ const FeaturesTiles = ({
                 </div>
                 <div className="features-tiles-item-content">
                   <h4 className="mt-0 mb-8">
-                    Itenary
+                    Itinerary
                     </h4>
                   <p className="m-0 text-sm">
                     Save and comment on your Itinerary.

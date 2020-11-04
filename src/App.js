@@ -17,6 +17,9 @@ import Search from './components/elements/Search';
 import Explore from "./components/elements/Explore";
 import ExploreRestaurant from "./components/elements/ExploreRestaurant";
 import Itinerary from "./components/elements/Itinerary";
+import ExploreHotel from "./components/elements/exploreHotels";
+import ExploreAttraction from "./components/elements/exploreAttractions";
+
 
 
 // Initialize Google Analytics
@@ -51,9 +54,12 @@ const App = () => {
           <Route exact path="/login" component={Login} />
           {/* <Route path="/map-page" component={MapPage} layout={LayoutDefault} /> */}
           <Route exact path="/search" component={Search} />
-          <Route exact path="/explore" component={Explore}/>
-          <Route exact path="/itinerary" component={Itinerary}/>
-          <Route exact path="/explorerestaurants" component={ExploreRestaurant}/>
+          <ProtectedRoute exact path="/explore" component={Explore}/>
+          <ProtectedRoute exact path="/itinerary" component={Itinerary}/>
+          <ProtectedRoute exact path="/restaurants" component={ExploreRestaurant}/>
+          <ProtectedRoute exact path="/hotels" component={ExploreHotel}/>
+          <ProtectedRoute exact path="/attractions" component={ExploreAttraction}/>
+
         </Switch>
       )} />
   );

@@ -235,6 +235,24 @@ export default class LoginForm extends Component{
 						createUser(this.state.user).then((response) => {
 
 							console.log("Hey i got data after send post", response);
+							if(response.data.status == 'Success'){
+								this.setState({
+									message: {
+										type: 'success',
+										message: 'Registration successful.'
+									}
+								});
+								alert("Registration Successful. Please Signin back!")
+							}
+							else{
+								this.setState({
+									message: {
+										type: 'failure',
+										message: 'Error in Registration'
+									}
+								});
+
+							}
 						});
 					}
 					
@@ -272,6 +290,26 @@ export default class LoginForm extends Component{
 	
 
 		const title = isLogin ? 'Sign In' : 'Sign Up'
+		const responseFacebook = (response) => {
+			console.log(response);
+			//setUserSession(response.accessToken, response.email);
+			//this.handlefacbookSubmit
+			try {
+			  //userHasAuthenticated(true);
+			  if (response.accessToken) {
+				this.state.user={name: response.name, email:response.email, password : 'facebook', confirmPassword: 'facebook'}
+				createUser(this.state.user).then((response) => {
+
+					console.log("Hey i got data after send post", response);
+					this.props.history.push('/search');
+
+				});
+				setUsername(response.name)
+			  }
+			} catch (e) {
+			  alert(e.message);
+			}
+		  }
 
 		return (
 				<div className="app-login-form">
@@ -285,7 +323,9 @@ export default class LoginForm extends Component{
 								{
 									message ? <div className="app-message">
 										<p className={message.type}>{message.message}</p>
+										<div></div>
 									</div>: null
+									
 								}
 
 								{
@@ -293,16 +333,16 @@ export default class LoginForm extends Component{
 										<FacebookLogin
 											appId="350321539653216" //APP ID NOT CREATED YET
 											fields="name,email,picture"
-											//callback={responseFacebook}
+											callback={responseFacebook}
 										/>
-										<div style={{alignContent:'center'}}>OR</div>
+										{/* <div style={{alignContent:'center'}}>OR</div> */}
 
-										<GoogleLogin
+										{/* <GoogleLogin
 											clientId="" //CLIENTID NOT CREATED YET
 											buttonText="LOGIN WITH GOOGLE"
 											// onSuccess={responseGoogle}
 											// onFailure={responseGoogle}
-										/>
+										/> */}
 										<br></br>
 									</div>: null
 									

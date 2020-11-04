@@ -12,8 +12,8 @@ export default class Header extends React.Component{
         // const [Username] = useState(name)
         require('./Header.css')
         return (
-            <nav className="nav1">
-            <Link to="/search" className="logo">Roadmapper</Link>
+            <nav className="nav1" >
+            <Link to="/search" className="logo">RoadMappr</Link>
             <ul>
                 <li><Link>Hi, {getUsername()}</Link></li>
                 <li><Link to="/Itinerary">Itinerary</Link></li>

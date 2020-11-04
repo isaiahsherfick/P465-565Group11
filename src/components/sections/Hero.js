@@ -70,7 +70,8 @@ const Hero = ({
                 Explore your favourite destinations!
                 </p>
               <div className="reveal-from-bottom" data-reveal-delay="600">
-                <Link to="/search">
+                {/* <Link to="/search"> */}
+                <Link to="/login">
                 <ButtonGroup>
                   <Button tag="a" color="primary" wideMobile href="#">
                     Search
