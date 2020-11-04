@@ -16,7 +16,7 @@ export default class Header extends React.Component{
             <Link to="/search" className="logo">RoadMappr</Link>
             <ul>
                 <li><Link>Hi, {getUsername()}</Link></li>
-                <li><Link to="/itinerary">Itinerary</Link></li>
+                {/* <li><Link to="/Itinerary">Itinerary</Link></li> */}
                 <li><Link onClick={() => 
                     {     removeUserSession();
                             //this.props.history.push("/");

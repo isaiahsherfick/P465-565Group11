@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Map from './Map';
-import Header from './Header'
+import Header from './HeaderSearch'
 
 class Search extends Component {
 

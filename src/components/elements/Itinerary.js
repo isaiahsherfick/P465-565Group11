@@ -21,7 +21,7 @@ function Itinerary() {
   const [myData, setMyData] = useState(cityData.attractions)
   const myData1 = myData.tasks
   const [notes, setNotes] = useState(myData1)
-  const Username = getExploreData()
+  //const Username = getUsername()
 
   const addJson = (myData) => {
     placeId = myData.place_id;
@@ -40,7 +40,7 @@ function Itinerary() {
       })
     })
       .then(res => res.json())
-      .then(() => alert("Added removed from Itinerary"))
+      .then(() => alert("Removed from Itinerary"))
       .then(() => console.log())
       .catch(err => console.log(err, "Unable to Post!"))
   }
@@ -56,15 +56,15 @@ function Itinerary() {
 
       </div>))
 
-  fetch('https://roadmappr.herokuapp.com/retrieveItinerary')
-    .then(response => response.json())
-    .then(data => console.log(data));
+  // fetch('https://roadmappr.herokuapp.com/retrieveItinerary')
+  //   .then(response => response.json())
+  //   .then(data => console.log(data));
 
 
   return (
     <div className="container">
       <Header2 />
-      <h1> Welcome to your Itinerary, {{Username}} </h1>
+      <h1> Welcome to your Itinerary, {getUsername()} </h1>
 
 
       <ul> {renderData} </ul>
