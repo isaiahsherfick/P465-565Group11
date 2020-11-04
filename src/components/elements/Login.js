@@ -314,10 +314,10 @@ export default class LoginForm extends Component{
 		return (
 				<div className="app-login-form">
 
-					<div className="app-login-form-inner">
+					<div style={{textAlign:'unset'}} className="app-login-form-inner">
 							<Link to = "/">
 							<button onClick="handleClose" className="app-dismiss-button">Close</button></Link>
-							<h2 id="login" className="form-title" style={{color:"GrayText"}} >{title}</h2>
+							<h2 style={{marginTop:'0px'}} id="login" className="form-title" style={{color:"GrayText"}} >{title}</h2>
 							<form onSubmit={this._onSubmit}>
 
 								{
