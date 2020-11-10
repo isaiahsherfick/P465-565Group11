@@ -1,6 +1,6 @@
 import Header2 from './Header2';
 import Header from './Header'
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 //import React, { useState } from 'react'
 import './Itinerary.css'
 import { getUsername } from '../../helpers/common';
@@ -9,56 +9,72 @@ import { getUsername } from '../../helpers/common';
 import { getExploreData } from '../../helpers/common';
 
 
+const myData =  [
+  {userId: "3", hotelName: "maria de france"},
+  {userId: "3", hotelName: "maria de spain"},
+  {userId: "3", hotelName: "maria de italy"},
+]
 
-const data = [(0, ['10:00AM Indianapolis airport', '2:00PM Los Angeles', '4:30PM Check in at Mariott', '8:00 Dinner'])]
 
-const cityData = getExploreData()
-
-let placeId = ""
 
 
 function Itinerary() {
-  const [myData, setMyData] = useState(cityData.attractions)
-  const myData1 = myData.tasks
-  const [notes, setNotes] = useState(myData1)
-  //const Username = getUsername()
 
-  const addJson = (myData) => {
-    placeId = myData.place_id;
-    fetch("https://roadmappr.herokuapp.com/removeFromItinerary", {
+ const [myData, setMyData] =  useState([])
+
+  useEffect(() => {
+    fetch('https://roadmappr.herokuapp.com/retrieveItinerary', {
       method: "POST",
-      headers: {
-        'Accept': 'application/json',
-        "Content-type": "application/json"
-      },
-      body: JSON.stringify({
-        // name:  JSON.stringify(myData.name),
-        name: myData.name,
-        userId: "1"
-
-        //array called "tasks"
-      })
+       headers: {
+        "content-type" : "application/json"
+       },
+       body: JSON.stringify({
+         userId: "3"
+       })
     })
-      .then(res => res.json())
-      .then(() => alert("Removed from Itinerary"))
-      .then(() => console.log())
-      .catch(err => console.log(err, "Unable to Post!"))
-  }
+    .then(response => response.json())
+    .then(data => setMyData(data.tasks))
+    .catch(err => console.log(err))
+  }, [])
+  
+  console.log(typeof myData)
 
-  const renderData =
-    myData.results.map(result => (
+  //https://roadmappr.herokuapp.com/removeFromItinerary
+const handleDelete =(name) => {
+  
+  fetch('https://roadmappr.herokuapp.com/removeFromItinerary', {
+    method: "POST",
+     headers: {
+      "content-type" : "application/json"
+     },
+     body: JSON.stringify({
+        userId: "3",
+         name
+     })
+  })
+  .then(response => response.json())
+ .then(res => console.log(res))
+.catch(err => console.log(err))
 
-      <div>
+setMyData(myData.filter(data => data !== name))
+}
 
-        <p className="notes">{notes}</p>
-        <p onClick={() => addJson(result)}> <a href={"#"}>Remove From Itinerary</a> </p>
+const renderData = (
+ 
+   <div>
+    {myData.map((data) => (
+      <div key={data}>
+         <p> {data}</p>
+          <button onClick={() => handleDelete(data)}>delete </button>
+        </div>
+    ))}
+     
+     </div>
+   
+
+)
 
 
-      </div>))
-
-  // fetch('https://roadmappr.herokuapp.com/retrieveItinerary')
-  //   .then(response => response.json())
-  //   .then(data => console.log(data));
 
 
   return (
@@ -66,17 +82,13 @@ function Itinerary() {
       <Header2 />
       <h1> Welcome to your Itinerary, {getUsername()} </h1>
 
+{myData.length < 1 ? <p>oops! no itenerary </p> : renderData}
 
-      <ul> {renderData} </ul>
+   
 
     </div>
   )
 
-
 }
 
 export default Itinerary;
-
-
-
-

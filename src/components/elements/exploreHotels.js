@@ -27,7 +27,7 @@ const Explore = () => {
                     body:JSON.stringify({
                         // name:  JSON.stringify(myData.name),
                         name: myData.name,
-                        userId: "1"
+                        userId: "3"
 
                     })
                 })
