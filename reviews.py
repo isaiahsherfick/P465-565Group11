@@ -102,7 +102,17 @@ class Review( ):
                 objs += 1
             total_stars_out_of_five /= max( objs , 1 )
             reviews_json[ "Average_Rating" ] = total_stars_out_of_five
-            return reviews_json
+            return json.dumps( { "reviews" : reviews_json } )
+
+        # function to post the reviews of the user.
+        def postReview( self ) :
+            # making a new id for the new user
+            with engine.connect( ) as connection :
+                self.review_id = 1 + int( connection.execute( "SELECT review_id FROM reviews" ).fetchall( )[ -1 ][ 0 ] )
+                connection.execute( "INSERT INTO reviews VALUES({},{},\'{}\',{},\'{}\',\'{}\');".format( self.review_id , self.owner_id , self.unique_location_key , self.stars_out_of_five \
+                        , self.review_header , self.review_body ) )
+            # returning the status if successfully inserted
+            return json.dumps( { "status" : "review post successful" } )
 
         # json object for all the review parameters
         def produceJson( self ) :

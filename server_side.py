@@ -2,6 +2,7 @@
 from flask import Flask , render_template , url_for , redirect , request , session , jsonify
 from flask_cors import CORS
 from location import *
+from reviews import *
 from flights import *
 from places import *
 from itinerary import *
@@ -146,12 +147,39 @@ def retrieveItinerary( ) :
     #itinerary_object.saveItinerary( )
     return itinerary_object.productJson( )
 
-# @server.route( '/review' , methods = [ 'POST' ] )
-# def customerReview( ) :
-#     # requesting the JSON data and showing it
-#     requested_data = request.get_json( force = True )
-#     review_object = Review( )
-#     review_object.
+@server.route( '/flightDetails' , methods = [ 'POST' ] )
+def flightDetails( ) :
+    # requesting the JSON data and showing it
+    requested_data = request.get_json( force = True )
+    # flight details from the client side
+    flights_object = Flights( startCity = requested_data[ "startCity" ] , destinationCity = requested_data[ "destinationCity" ] , startDate = requested_data[ "startDate" ] )
+    # returning the json formatted flight details
+    return flights_object.productJson( )
+
+@server.route( '/gatherReview' , methods = [ 'POST' ] )
+def gatherReview( ) :
+    # requesting the JSON data and showing it
+    requested_data = request.get_json( force = True )
+    # making a review object
+    review_object = Review( )
+    # which will return gatherReviews for the respective key
+    return review_object.gatherReviews( requested_data[ "unique_location_key" ] )
+
+@server.route( '/postReview' , methods = [ 'POST' ] )
+def postReview( ) :
+    # requesting the JSON data and showing it
+    requested_data = request.get_json( force = True )
+    # making a review object
+    review_object = Review( )
+    # setting all the parameters as per input from the user
+    review_object.setOwnerId( requested_data[ "owner_id" ] )
+    review_object.setUniqueLocationKey( requested_data[ "unique_location_key" ] )
+    review_object.setStarsOutOfFive( requested_data[ "stars_out_of_five" ] )
+    review_object.setReviewHeader( requested_data[ "review_header" ] )
+    review_object.setReviewBody( requested_data[ "review_body" ] )
+    # returning the status
+    return review_object.postReview( )
+
 
 # checks whether current file is running
 if __name__ == '__main__' :

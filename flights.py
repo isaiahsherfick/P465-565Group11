@@ -11,7 +11,7 @@ engine = create_engine( DB_URL )
 
 # the url for the flighscanners api
 # and the headers with key fed into it
-# url = "https://rapidapi.p.rapidapi.com/apiservices/autosuggest/v1.0/US/USD/en-US/"
+url = "https://rapidapi.p.rapidapi.com/apiservices/autosuggest/v1.0/US/USD/en-US/"
 headers = {
     'x-rapidapi-key': "bd4910c4f3msh6daf741cb57f839p19efffjsn9bbea2015d64",
     'x-rapidapi-host': "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com"
@@ -19,11 +19,13 @@ headers = {
 
 class Flights( ) :
 
-    def __init__( self , startCity = '' , destinationCity = '' , startDate = datetime.today( ).strftime( '%Y-%m-%d' ) , endDate = "" ) :
+    def __init__( self , startCity = '' , destinationCity = '' , startDate = datetime.today( ).strftime( '%Y-%m-%d' ) ) :
         self.startCity = startCity
         self.destinationCity = destinationCity
         self.startDate = startDate
-        self.endDate = endDate
+        self.endDate = ""
+        self.quotesList = ""
+        self.carrierList = ""
 
     # getting the start city
     def getStartCity( self ) :
@@ -74,4 +76,27 @@ class Flights( ) :
             url2 = "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsequotes/v1.0/US/USD/en-US/" + startPlace + "/" + destinationPlace + "/" + self.startDate + "/" + self.endDate + "?rapidapi-key=" \
             + headers[ "x-rapidapi-key" ]
             # getting the request for the url and showing the json outptu which will be used thereafter
-            print( requests.request( "GET" , url2 , headers = headers ).json( ) )
+            requested_data = requests.request( "GET" , url2 , headers = headers ).json( )
+            self.quotesList = requested_data[ "Quotes" ]
+            self.carrierList = requested_data[ "Carriers" ]
+            # redudanat parameters not needed as of now
+            # places_list = requested_data[ "Places" ]
+            # currencies_list = requested_data[ "Currencies" ]
+
+    # function to find the carrier name for the respective id
+    def find_carrier( self , carrier_id ) :
+        for elem in self.carrierList :
+            if elem[ "CarrierId" ] == carrier_id :
+                return elem[ "Name" ]
+        return carrier_id
+
+    def productJson( self ) :
+        # calling the function for geting quotes and carriers list
+        self.populatePortsFromAPI( )
+        # the list
+        flight_details = [ ]
+        for elem in self.quotesList :
+            nested_dict = elem[ "OutboundLeg" ]
+            flight_details += { "price" : elem[ "MinPrice" ] , "direct" : elem[ "Direct" ] , "departureDate" : nested_dict[ "DepartureDate" ] , "carrierName" : self.find_carrier( nested_dict[ "CarrierIds" ][ 0 ] ) } ,
+        # getting a json file and returning it with only relevant details in the list of dictionary
+        return json.dumps( { "flight_details" : flight_details } )
