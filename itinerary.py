@@ -19,16 +19,36 @@ engine = create_engine(DB_URL)
 class Itinerary( ) :
 
     # the constructor having the input ownerId and the list of tasks
-    def __init__( self , ownerId = -1 , tasks = [ ] ) :
+    def __init__( self , ownerId = -1 , tasks = [ ] , comments = [ ] ) :
         self.ownerId = ownerId
         # self.tasks = processTasks( tasks )
         self.tasks = tasks
+        self.comments = comments
     #in the case where we are constructing the Itinerary object from the DB to pass to the frontend, a blank one will be instantiated
     #then initFromDB will be called to populate the member variables
 
     # adding a task to a preexisting list of tasks
     def appendTask( self , task ) :
         self.tasks += task ,
+
+    def appendComment(self, commenterId, comment):
+        with engine.connect() as connection:
+            self.comments += str(commenterId) + " " + comment,
+            print(self.comments)
+            commentsAsSQLArray = '\'{'
+            for comment in self.comments :
+                commentsAsSQLArray += '\"' + str( comment ) + '\"' + ','
+            commentsAsSQLArray = commentsAsSQLArray[ :-1 ]
+            commentsAsSQLArray += '}\''
+            connection.execute("UPDATE Itinerary SET comments={} WHERE owner_id={}".format(commentsAsSQLArray, self.ownerId))
+
+    def flushComments(self):
+        with engine.connect() as connection:
+            connection.execute("UPDATE Itinerary SET comments=\'{}\' WHERE owner_id={}".format('{}', self.ownerId))
+        print("Comments flushed")
+
+    def getComments(self):
+        return self.comments
 
     # returning the list of tasks
     def getTasks( self ) :
@@ -93,7 +113,12 @@ class Itinerary( ) :
         with engine.connect() as connection:
             summary = connection.execute( "SELECT * FROM itinerary WHERE owner_id={}".format( self.ownerId ) ).fetchall( )
         # connection.close( )
-        self.tasks = list( summary[ 0 ][ 1 ] ) if summary else [ ]
+        if summary:
+            print(summary)
+            self.tasks = list( summary[ 0 ][ 1 ] )
+            self.comments = list(summary[ 0 ] [ 2 ])
+        else:
+            self.tasks = [ ]
 
     # returning json object of the list of tasks
     def productJson( self ) :
