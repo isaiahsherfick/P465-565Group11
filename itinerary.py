@@ -104,7 +104,6 @@ class Itinerary( ) :
             if self.comments:
                 commentsAsSQLArray = commentsAsSQLArray[ :-1 ]
             commentsAsSQLArray += '}\''
-            print(commentsAsSQLArray)
             with engine.connect() as connection:
                 connection.execute( "INSERT INTO itinerary values ({}, \'{}\', {});".format( self.ownerId , tasksAsSQLArray, commentsAsSQLArray ) )
 
