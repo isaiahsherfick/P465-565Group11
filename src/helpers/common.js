@@ -69,3 +69,26 @@ export const getUsername= () => {
   if (usernameStr) return JSON.parse(usernameStr);
   else return null;
 }
+
+export const setStartCity = (startCity) => {
+  sessionStorage.setItem('startCity', startCity);
+}
+
+export const getstartCity = () => {
+  const userStr = sessionStorage.getItem('startCity');
+  const userArr = userStr.split(',');
+  const city = JSON.stringify(userArr[0]);
+  console.log("rasm", city);
+  if (city) return JSON.parse(city);
+  else return null;
+}
+
+export const setFlightData = (flightData) => {
+  sessionStorage.setItem('flightData', JSON.stringify(flightData));
+}
+
+export const getFlightData = () => {
+  const flightStr = sessionStorage.getItem('flightData');
+  if (flightStr) return JSON.parse(flightStr);
+  else return null;
+}

@@ -19,6 +19,7 @@ import ExploreRestaurant from "./components/elements/ExploreRestaurant";
 import Itinerary from "./components/elements/Itinerary";
 import ExploreHotel from "./components/elements/exploreHotels";
 import ExploreAttraction from "./components/elements/exploreAttractions";
+import ExploreFlight from "./components/elements/exploreFlights";
 
 
 
@@ -59,7 +60,7 @@ const App = () => {
           <Route exact path="/restaurants" component={ExploreRestaurant}/>
           <Route exact path="/hotels" component={ExploreHotel}/>
           <Route exact path="/attractions" component={ExploreAttraction}/>
-
+          <Route exact path="/flights" component={ExploreFlight}/>
         </Switch>
       )} />
   );
