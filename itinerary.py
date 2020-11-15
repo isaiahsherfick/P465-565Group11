@@ -101,10 +101,12 @@ class Itinerary( ) :
             commentsAsSQLArray = '\'{'
             for comment in self.comments :
                 commentsAsSQLArray += '\"' + str( comment ) + '\"' + ','
-            commentsAsSQLArray = commentsAsSQLArray[ :-1 ]
+            if self.comments:
+                commentsAsSQLArray = commentsAsSQLArray[ :-1 ]
             commentsAsSQLArray += '}\''
+            print(commentsAsSQLArray)
             with engine.connect() as connection:
-                connection.execute( "INSERT INTO itinerary values ({}, (\'{}\', \'{}\'));".format( self.ownerId , tasksAsSQLArray, commentsAsSQLArray ) )
+                connection.execute( "INSERT INTO itinerary values ({}, \'{}\', {});".format( self.ownerId , tasksAsSQLArray, commentsAsSQLArray ) )
 
     # # assuming the itinerary to handle string to list manipulation
     def initFromDBinsert( self ) :
