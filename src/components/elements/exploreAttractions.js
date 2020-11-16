@@ -3,6 +3,8 @@ import Header2 from './Header2';
 import Header from './Header'
 import React, {useState} from 'react'
 import { getExploreData } from '../../helpers/common';
+import { getUserId } from '../../helpers/common';
+
 import './Explore.css'
 
 
@@ -27,7 +29,7 @@ const Explore = () => {
                     body:JSON.stringify({
                         // name:  JSON.stringify(myData.name),
                         name: myData.name,
-                        userId: "3"
+                        userId: getUserId()
                         
 
                     })

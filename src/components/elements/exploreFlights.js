@@ -3,6 +3,12 @@ import Header2 from './Header2';
 import Header from './Header'
 import React, {useState} from 'react'
 import { getFlightData } from '../../helpers/common';
+import { getstartCity } from '../../helpers/common';
+import { getCityData } from '../../helpers/common';
+import { getUserId } from '../../helpers/common';
+import { setPrice } from '../../helpers/common';
+
+
 import './Explore.css'
 
 
@@ -17,6 +23,7 @@ const Flight = () => {
 
              let placeId = "" 
              const addJson = (myData) => {
+                 setPrice(myData.price)
                  placeId = myData.place_id;
                 fetch("https://roadmappr.herokuapp.com/addToItinerary", {
                     method: "POST",
@@ -26,8 +33,8 @@ const Flight = () => {
                     },
                     body:JSON.stringify({
                         // name:  JSON.stringify(myData.name),
-                        name: myData.carrierName,
-                        userId: "3"
+                        name: 'Your flight from '+ getstartCity() + ' to ' + getCityData() + ' : ' + myData.carrierName,
+                        userId: getUserId()
                         
 
                     })

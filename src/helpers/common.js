@@ -50,6 +50,7 @@ export const setUserId = (userId) => {
 export const getUserId= () => {
   const userIdStr = sessionStorage.getItem('userId');
   if (userIdStr) return JSON.parse(userIdStr);
+  //if (userIdStr) return userIdStr;
   else return null;
 }
 
@@ -89,6 +90,18 @@ export const setFlightData = (flightData) => {
 
 export const getFlightData = () => {
   const flightStr = sessionStorage.getItem('flightData');
+  if (flightStr) return JSON.parse(flightStr);
+  else return null;
+}
+
+localStorage.setItem('flightPrice', parseInt(0));
+export const setPrice = (flightData) => {
+  //sessionStorage.setItem('flightPrice', parseInt(flightData));
+  localStorage.flightPrice = Number(localStorage.flightPrice) + parseInt(flightData);
+}
+
+export const getPrice = () => {
+  const flightStr = localStorage.getItem('flightPrice');
   if (flightStr) return JSON.parse(flightStr);
   else return null;
 }

@@ -20,6 +20,8 @@ import Itinerary from "./components/elements/Itinerary";
 import ExploreHotel from "./components/elements/exploreHotels";
 import ExploreAttraction from "./components/elements/exploreAttractions";
 import ExploreFlight from "./components/elements/exploreFlights";
+import Payment from "./components/elements/payment";
+import CommentItinerary from "./components/elements/commentItinerary";
 
 
 
@@ -61,6 +63,9 @@ const App = () => {
           <Route exact path="/hotels" component={ExploreHotel}/>
           <Route exact path="/attractions" component={ExploreAttraction}/>
           <Route exact path="/flights" component={ExploreFlight}/>
+          <Route exact path="/book" component={Payment}/>
+          <Route exact path="/comment" component={CommentItinerary}/>
+
         </Switch>
       )} />
   );

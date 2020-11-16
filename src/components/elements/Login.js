@@ -202,7 +202,7 @@ export default class LoginForm extends Component{
 										message: 'Login successful.'
 									}
 								});
-								setUserId(response.data.user_Id)
+								setUserId(response.data.user_id)
 								setUsername(response.data.name)
 								this.props.history.push('/search')
 							}
