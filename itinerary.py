@@ -116,7 +116,7 @@ class Itinerary( ) :
         if summary:
             print(summary)
             self.tasks = list( summary[ 0 ][ 1 ] )
-            self.comments = list(summary[ 0 ] [ 2 ])
+            self.comments = list(summary[ 0 ][ 2 ])
         else:
             self.tasks = [ ]
 

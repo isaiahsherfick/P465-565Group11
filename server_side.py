@@ -180,6 +180,20 @@ def postReview( ) :
     # returning the status
     return review_object.postReview( )
 
+@server.route( '/postComment' , methods = [ 'POST' ] )
+def postComment( ) :
+    # requesting the JSON data and showing it
+    requested_data = request.get_json( force = True )
+    # making a review object
+    # making a review object with ownerId
+    review_object = Itinerary( ownerId = requested_data[ "owner_id" ] )
+    # calling the database intializiation
+    review_object.initFromDBdisplay( )
+    # appending the user comments to the database
+    review_object.appendComment( requested_data[ "commenter_id" ] , requested_data[ "comment_body" ] )
+    # returning the json object
+    return review_object.productJson( )
+
 
 # checks whether current file is running
 if __name__ == '__main__' :
