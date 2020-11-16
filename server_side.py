@@ -184,8 +184,7 @@ def postReview( ) :
 def postComment( ) :
     # requesting the JSON data and showing it
     requested_data = request.get_json( force = True )
-    # making a review object
-    # making a review object with ownerId
+    # making a itinerary object with ownerId
     review_object = Itinerary( ownerId = requested_data[ "owner_id" ] )
     # calling the database intializiation
     review_object.initFromDBdisplay( )
@@ -194,6 +193,14 @@ def postComment( ) :
     # returning the json object
     return review_object.productJson( )
 
+# get request to return all itineraries to the user
+@server.route( '/allItineraries' , methods = [ 'GET' ] )
+def allItineraries( ) :
+    # building a connection with the database
+    with engine.connect() as connection :
+        itnerary_obj = connection.execute( "SELECT * FROM Itinerary;" ).fetchall( )
+    # returning the list of dictionaries to the user.
+    return jsonify( { 'Itineraries' : [ dict( row ) for row in itnerary_obj ] } )
 
 # checks whether current file is running
 if __name__ == '__main__' :

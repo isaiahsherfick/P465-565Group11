@@ -98,8 +98,14 @@ class Itinerary( ) :
             for task in self.tasks :
                 tasksAsSQLArray += (',\"' + str( task ) + '\"')
             tasksAsSQLArray = '{' + tasksAsSQLArray[ 1: ] + '}'
+            commentsAsSQLArray = '\'{'
+            for comment in self.comments :
+                commentsAsSQLArray += '\"' + str( comment ) + '\"' + ','
+            if self.comments:
+                commentsAsSQLArray = commentsAsSQLArray[ :-1 ]
+            commentsAsSQLArray += '}\''
             with engine.connect() as connection:
-                connection.execute( "INSERT INTO itinerary values ({}, (\'{}\'));".format( self.ownerId , tasksAsSQLArray ) )
+                connection.execute( "INSERT INTO itinerary values ({}, \'{}\', {});".format( self.ownerId , tasksAsSQLArray, commentsAsSQLArray ) )
 
     # # assuming the itinerary to handle string to list manipulation
     def initFromDBinsert( self ) :
@@ -116,10 +122,10 @@ class Itinerary( ) :
         if summary:
             print(summary)
             self.tasks = list( summary[ 0 ][ 1 ] )
-            self.comments = list(summary[ 0 ][ 2 ])
+            self.comments = list( summary[ 0 ][ 2 ] )
         else:
             self.tasks = [ ]
 
     # returning json object of the list of tasks
     def productJson( self ) :
-        return json.dumps( { "tasks" : self.tasks } )
+        return json.dumps( { "tasks" : self.tasks , "comments" : self.comments} )
