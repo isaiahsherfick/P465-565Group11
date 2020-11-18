@@ -202,6 +202,29 @@ def allItineraries( ) :
     # returning the list of dictionaries to the user.
     return jsonify( { 'Itineraries' : [ dict( row ) for row in itnerary_obj ] } )
 
+# get request to return all itineraries to the user
+@server.route( '/topPlaces' , methods = [ 'GET' ] )
+def topPlaces( ) :
+    # building a connection with the database
+    with engine.connect() as connection :
+        # making a review object
+        review_object = Review( )
+        locations_in_db = connection.execute( "SELECT distinct unique_location_key from reviews;" ).fetchall( )
+        ratings , i = [ ] , 0
+        for loc in locations_in_db :
+            rate_list = connection.execute( "SELECT stars_out_of_five from reviews where unique_location_key = \'{}\'".format( loc[ 0 ] ) ).fetchall( )
+            ans = [ 0 , 0 ]
+            for elem in rate_list :
+                ans[ 0 ] += elem[ 0 ]
+                ans[ 1 ] += 1
+            ratings += ( ans[ 0 ] / ans[ 1 ] , i ) ,
+            i += 1
+        ratings.sort( reverse = True )
+        locations_list = [ ]
+        for elem in ratings[ :10 ] :
+            locations_list += locations_in_db[ elem[ 1 ] ]
+    return jsonify( { "locations" : locations_list } )
+
 # checks whether current file is running
 if __name__ == '__main__' :
     # debug = True makes it convenient by restarting the server whenever code is updated
