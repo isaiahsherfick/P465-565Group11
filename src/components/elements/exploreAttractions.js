@@ -3,6 +3,8 @@ import Header2 from './Header2';
 import Header from './Header'
 import React, {useState} from 'react'
 import { getExploreData } from '../../helpers/common';
+import { getUserId } from '../../helpers/common';
+
 import './Explore.css'
 
 
@@ -17,8 +19,6 @@ const Explore = () => {
 
              let placeId = "" 
              const addJson = (myData) => {
-                console.log("MY DATA===>", myData)
-
                  placeId = myData.place_id;
                 fetch("https://roadmappr.herokuapp.com/addToItinerary", {
                     method: "POST",
@@ -29,7 +29,7 @@ const Explore = () => {
                     body:JSON.stringify({
                         // name:  JSON.stringify(myData.name),
                         name: myData.name,
-                        userId: "3"
+                        userId: getUserId()
                         
 
                     })
@@ -78,7 +78,6 @@ console.log(photo_reference_goes_here, "<== city data" )
            <Header/>
            <Header2 /> 
            {renderData}
-           
        </div>
     )
 }
