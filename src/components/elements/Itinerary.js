@@ -1,7 +1,6 @@
 import Header2 from './Header2';
 import Header from './Header'
 import React, {useState, useEffect} from 'react'
-import { withRouter } from 'react-router-dom';
 //import React, { useState } from 'react'
 import './Itinerary.css'
 import { getUsername } from '../../helpers/common';
@@ -11,7 +10,7 @@ import { getExploreData } from '../../helpers/common';
 import { Link } from 'react-router-dom';
 import { getUserId } from '../../helpers/common';
 
-const LS_DATA = 'ITERNARY';
+
 const myData =  [
   {userId: "3", hotelName: "maria de france"},
   {userId: "3", hotelName: "maria de spain"},
@@ -27,22 +26,19 @@ function Itinerary() {
  const [myComment, setMyComment] = useState([])
 
   useEffect(() => {
-     setMyData(JSON.parse(localStorage.getItem(LS_DATA)));
-    // fetch('https://roadmappr.herokuapp.com/retrieveItinerary', {
-    //   method: "POST",
-    //    headers: {
-    //     "content-type" : "application/json"
-    //    },
-    //    body: JSON.stringify({
-    //      userId: "3"
-    //    })
-    // })
-    // .then(response => response.json())
-    // .then(data => {
-    //   setMyData(data.tasks)
-    // console.log("RESPONSE DATA===>", data)
-    // })
-    // .catch(err => console.log(err))
+    fetch('https://roadmappr.herokuapp.com/retrieveItinerary', {
+      method: "POST",
+       headers: {
+        "content-type" : "application/json"
+       },
+       body: JSON.stringify({
+         userId: getUserId()
+       })
+    })
+    .then(response => response.json())
+    .then(data => setMyData(data.tasks))
+    .then(comment => setMyComment(comment.comments))
+    .catch(err => console.log(err))
   }, [])
   
   console.log(typeof myData)
@@ -67,22 +63,13 @@ const handleDelete =(name) => {
 setMyData(myData.filter(data => data !== name))
 }
 
-const reviewHandler = (data)=>{
-this.props.history.push({
-  pathname: '/reviews',
-  data
-})
-}
-console.log("MY DATA=====>", myData);
-  
 const renderData = (
  
-    <div>
-    {myData.map((data, index) => (
-      <div key={index}>
-         <p>Name: {data.name}</p>
-          <button className="whitetb" onClick={()=>reviewHandler(data)}>Reviews</button>
-          <button onClick={() => handleDelete(data)}>  Delete  </button>
+   <div>
+    {myData.map((data) => (
+      <div key={data}>
+         <p> {data}</p>
+          <button onClick={() => handleDelete(data)}>delete </button>
         </div>
     ))}
   <p>Here's what others think about your itinerary</p>
