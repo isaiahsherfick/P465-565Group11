@@ -9,7 +9,7 @@ import { getUsername } from '../../helpers/common';
 import { getExploreData } from '../../helpers/common';
 import { Link } from 'react-router-dom';
 import { getUserId } from '../../helpers/common';
-import Modal from './FlightModal';
+import Modal from './CommentModal';
 
 
 const myData =  [
@@ -32,10 +32,13 @@ function Itinerarycomment() {
     //   };
 
  const [myData, setMyData] =  useState([])
- const [show, setShow] = useState(false)
- const showModal = (show) => {
-     setShow(!show)
- }
+//  const [show, setShow] = useState(false)
+ const [show, setShow] = useState(false);
+ const openModal = () => setShow(true);
+ const closeModal = () => setShow(false);
+//  const showModal = (show) => {
+//      setShow(!show)
+//  }
 
   useEffect(() => {
     fetch('https://roadmappr.herokuapp.com/allItineraries', {
@@ -84,12 +87,14 @@ const renderData = (
          {/* <p> {data.comments}</p> */}
          {data.comments.map((comment) => (<p> {comment}</p>))}
 
-          <button onClick={()=> showModal(show)}>Add Comment</button>
+          {/* <button onClick={()=> showModal(show)}>Add Comment</button> */}
+          {!show && <button onClick={openModal}>Add Comment</button>}
           {/* <button onClick={() => handleDelete(data)} onClick={e => {this.showModal(e);}}>Add Comment</button> */}
           {/* <Modal onClose={this.showModal} show={this.state.show}>
             </Modal> */}
-            <Modal onClose={()=> showModal(show)} setShow>
-            </Modal>
+            {/* <Modal onClose={()=> showModal(show)} setShow>
+            </Modal> */}
+            {/* <Modal closeModal={closeModal} show={show} /> */}
         </div>
     ))}
      

@@ -55,10 +55,11 @@ nav {
   .menuItems {
     list-style: none;
     display: flex;
+    padding-left: 0px;
 
     li {
       margin: 50px;
-
+      // padding-left: 10px;
       a {
         text-decoration: none;
         color: #8f8f8f;

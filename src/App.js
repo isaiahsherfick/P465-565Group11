@@ -22,7 +22,7 @@ import ExploreAttraction from "./components/elements/exploreAttractions";
 import ExploreFlight from "./components/elements/exploreFlights";
 import Payment from "./components/elements/payment";
 import CommentItinerary from "./components/elements/commentItinerary";
-
+import PopularPlaces from "./components/elements/popularPlaces";
 
 
 // Initialize Google Analytics
@@ -65,6 +65,7 @@ const App = () => {
           <Route exact path="/flights" component={ExploreFlight}/>
           <Route exact path="/book" component={Payment}/>
           <Route exact path="/comment" component={CommentItinerary}/>
+          <Route exact path="/popular" component={PopularPlaces}/>
 
         </Switch>
       )} />

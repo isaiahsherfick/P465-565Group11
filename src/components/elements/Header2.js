@@ -20,11 +20,11 @@ export default class Header2 extends React.Component{
 
             <nav className="nav2">
             <ul class="menuItems">
-                <li><a href='#' data-item='TravelAdvice'  onClick={e => {this.showModal(e);}}>Travel Advice</a></li>
+                <li><a href='#' data-item='Flights'  onClick={e => {this.showModal(e);}}>Flights</a></li>
                 <li><Link to="./hotels"><a href='#' data-item='Hotels'>Hotels</a></Link></li>
-                <li><Link to="./attractions"><a href='#' data-item='TTD'>Things to do</a></Link></li>
-                <li><Link to='./restaurants'><a href='#' data-item='restaurants'>restaurants</a></Link></li>
-                <li><a href='#' data-item='More'>More</a></li>
+                <li><Link to="./attractions"><a href='#' data-item='Thingstodo'>Things to do</a></Link></li>
+                <li><Link to='./restaurants'><a href='#' data-item='Restaurants'>Restaurants</a></Link></li>
+                <li><Link to="./popular"><a href='#' data-item='PopularPlaces'>Popular Places</a></Link></li>
             </ul>
             </nav>
             <Modal onClose={this.showModal} show={this.state.show}>
