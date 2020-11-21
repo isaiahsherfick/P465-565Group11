@@ -68,7 +68,7 @@ setMyData(myData.filter(data => data !== name))
 }
 
 const reviewHandler = (data)=>{
-props.history.push({
+this.props.history.push({
   pathname: '/reviews',
   data
 })
