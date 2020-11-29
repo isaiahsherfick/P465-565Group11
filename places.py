@@ -3,6 +3,7 @@ from collections import defaultdict
 from flask import jsonify
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import create_engine
+from reviews import *
 import urllib, json
 
 # Adding the Heroku URL
@@ -101,3 +102,29 @@ class Place():
             self.attractions = json.loads( attractionJsonRaw )
             self.restaurants = json.loads( restaurantJsonRaw )
             self.hotels = json.loads( hotelJsonRaw )
+
+    def topPlaces( self ) :
+        # building a connection with the database
+        with engine.connect() as connection :
+            # making a review object
+            review_object = Review( )
+            locations_in_db = connection.execute( "SELECT distinct unique_location_key from reviews;" ).fetchall( )
+            ratings , i = [ ] , 0
+            for loc in locations_in_db :
+                rate_list = connection.execute( "SELECT stars_out_of_five from reviews where unique_location_key = \'{}\'".format( loc[ 0 ] ) ).fetchall( )
+                ans = [ 0 , 0 ]
+                for elem in rate_list :
+                    ans[ 0 ] += elem[ 0 ]
+                    ans[ 1 ] += 1
+                ratings += ( ans[ 0 ] / ans[ 1 ] , i ) ,
+                i += 1
+            ratings.sort( reverse = True )
+            locations_list = [ ]
+            for elem in ratings[ :10 ] :
+                loc_url = ( 'https://maps.googleapis.com/maps/api/place/details/json'
+                '?place_id=%s'
+                '&key=%s' ) % ( locations_in_db[ elem[ 1 ] ][ 0 ] , AUTH_KEY )
+                resp = urllib.request.urlopen( loc_url )
+                respraw = resp.read( )
+                locations_list += json.loads( respraw ) ,
+        return jsonify( { "Top_Places" : locations_list } )
