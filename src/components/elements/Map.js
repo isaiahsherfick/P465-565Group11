@@ -9,6 +9,7 @@ import { GoogleMapsAPI } from '../../helpers/client-config';
 import { getLatitude } from '../../helpers/common';
 import { getLongitude } from '../../helpers/common';
 import { setCityData } from '../../helpers/common';
+import { setmapCityData } from '../../helpers/common';
 import axios from 'axios';
 
 Geocode.setApiKey( GoogleMapsAPI );
@@ -282,6 +283,7 @@ class Map extends Component{
 		let map;
 		if( this.props.center.lat !== undefined ) {
 			setSearchData(this.state.mapPosition.lat, this.state.mapPosition.lng)
+			setmapCityData(this.state.address)
 			setCityData(this.state.area)
 			// this.props.history.push('/explore')
 			//window.location = '/explore'

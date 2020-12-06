@@ -3,11 +3,9 @@ import Header2 from './Header2';
 import Header from './Header'
 import React, {useState} from 'react'
 import { getExploreData } from '../../helpers/common';
-import { getUserId } from '../../helpers/common';
-
 import './Explore.css'
 
-
+const LS_DATA = 'ITERNARY';
 
 const Explore = () => {
 
@@ -19,6 +17,9 @@ const Explore = () => {
 
              let placeId = "" 
              const addJson = (myData) => {
+                 const dataToAdd = {placeId: myData.place_id, name: myData.name};
+                 saveToLocalStorage(dataToAdd);
+           
                  placeId = myData.place_id;
                 fetch("https://roadmappr.herokuapp.com/addToItinerary", {
                     method: "POST",
@@ -29,14 +30,23 @@ const Explore = () => {
                     body:JSON.stringify({
                         // name:  JSON.stringify(myData.name),
                         name: myData.name,
-                        userId: getUserId()
+                        placeId: placeId,
+                        userId: "3"
 
                     })
                 })
                 .then(res => res.json())
                 .then(() => alert("Added successfully to Itinerary"))
-                .then(() => console.log())
+                .then(() =>console.log(""))
                 .catch(err => console.log(err, "Unable to Post!"))
+                }
+
+                const saveToLocalStorage = (data) =>{
+           
+                   let myLSData = JSON.parse(localStorage.getItem(LS_DATA)) || [];
+                  myLSData.push(data)
+
+                   localStorage.setItem(LS_DATA, JSON.stringify(myLSData));
                 }
 
                 

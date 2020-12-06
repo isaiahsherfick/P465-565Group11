@@ -9,6 +9,9 @@ import { getUsername } from '../../helpers/common';
 import { getExploreData } from '../../helpers/common';
 import { Link } from 'react-router-dom';
 import { getUserId } from '../../helpers/common';
+import { withScriptjs } from "react-google-maps";
+
+import IMap from './ItineraryMap';
 
 
 const myData =  [
@@ -82,6 +85,7 @@ const renderData = (
 
 )
 
+const MapLoader = withScriptjs(IMap);
 
 
 
@@ -92,6 +96,11 @@ const renderData = (
       <h1> Welcome to your Itinerary, {getUsername()} </h1>
 
 {myData.length < 1 ? <p>oops! no itinerary </p> : renderData}
+      {/* <IMap /> */}
+      <MapLoader
+      googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyCqflolF2b4aNNcyQs0XdbcoAFwtby7Muw"
+      loadingElement={<div style={{ height: `100%` }} />}
+  />
     <div>Finalize your Itinerary by booking <Link to="/book">here</Link></div>
     <div>Comment on other itineraries by clicking <Link to="/comment">here</Link></div>
 

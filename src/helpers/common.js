@@ -2,6 +2,15 @@ export const setCityData = (cityData) => {
   sessionStorage.setItem('cityData', JSON.stringify(cityData));
 }
 
+export const setmapCityData = (mapcityData) => {
+  sessionStorage.setItem('mapcityData', JSON.stringify(mapcityData));
+}
+export const getmapCityData = () => {
+  const userStr = sessionStorage.getItem('mapcityData');
+  if (userStr) return JSON.stringify(userStr);
+  else return null;
+}
+
 export const getCityData = () => {
   const userStr = sessionStorage.getItem('cityData');
   if (userStr) return JSON.parse(userStr);
@@ -74,6 +83,15 @@ export const getUsername= () => {
 export const setStartCity = (startCity) => {
   sessionStorage.setItem('startCity', startCity);
 }
+
+
+
+export const getmapstartCity = () => {
+  const userStr = sessionStorage.getItem('startCity');
+  if (userStr) return JSON.stringify(userStr);
+  else return null;
+}
+
 
 export const getstartCity = () => {
   const userStr = sessionStorage.getItem('startCity');

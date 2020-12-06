@@ -16,7 +16,6 @@ import { getUserId } from '../../helpers/common';
 function Places() {
 
  const [myData, setMyData] =  useState([])
- const [myComment, setMyComment] = useState([])
 
   useEffect(() => {
     fetch('https://roadmappr.herokuapp.com/topPlaces', {
@@ -27,29 +26,44 @@ function Places() {
 
     })
     .then(response => response.json())
-    .then(data => setMyData(data.locations))
+    .then(data => setMyData(data.Top_Places))
     .catch(err => console.log(err))
   }, [])
 
   
-  console.log(typeof myData)
+  console.log('popplaces', myData)
 
 
 
-const renderData = (
+// const renderData = (
  
-   <div>
-    {myData.map((data) => (
-      <div key={data}>
-         <p> {data}</p>
-        </div>
-    ))}
+//    <div>
+//     {myData.map((data) => (
+//       <div key={data}>
+//          <p> {data}</p>
+//         </div>
+//     ))}
 
      
-     </div>
+//      </div>
    
 
-)
+// )
+
+const renderData = myData.map(result => (
+                     
+  <div style={{background: "lightBlue"}} > 
+  {console.log(result.result.name)}
+      <p>{result.result.name} </p>
+      <p>{result.result.rating}</p>
+      <p>{result.result.vicinity}</p>
+
+      {/* <p onClick={() => addJson(result)}> <a href={"#"}>Add to Itinerary</a> </p> */}
+<img style={{display:"unset"}} src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${result.result.photos[0].photo_reference}&key=AIzaSyANxvSPyPXr2rMPMSUjCqvBQ6_PS2cOs3Q`}/>
+      {/* <img src={str1} /> */}
+      {/* <img src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&amp;photoreference=${result.photos[0].photo_reference}&amp;key=AIzaSyCqflolF2b4aNNcyQs0XdbcoAFwtby7Muw`}/> */}
+      </div>
+))
 
 
 

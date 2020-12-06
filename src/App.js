@@ -25,7 +25,7 @@ import CommentItinerary from "./components/elements/commentItinerary";
 import PopularPlaces from "./components/elements/popularPlaces";
 import Reviews from "./components/elements/Reviews.js";
 import ViewReviews from './components/elements/ViewReviews';
-
+import CurrencyConversion from './components/elements/CurrencyConversion';
 
 
 // Initialize Google Analytics
@@ -71,6 +71,7 @@ const App = () => {
           <Route exact path="/popular" component={PopularPlaces}/>
           <Route exact path="/reviews" component={Reviews}/>
           <Route exact path="/viewreviews" component={ViewReviews}/>
+          <Route exact path="/conversion" component={CurrencyConversion}/>
 
         </Switch>
       )} />

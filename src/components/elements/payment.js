@@ -4,6 +4,8 @@ import ReactDOM from "react-dom";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import { BrowserRouter } from "react-router-dom";
+import { Link } from 'react-router-dom';
+
 
 //import ElementDemos from "./ElementDemos";
 
@@ -33,6 +35,7 @@ const Payment = () => {
       <Header/>
       <div><h4 style={{marginTop:'100px'}}>Hi {getUsername()}, enter your card details below to confirm your bookings.<br/>
   Total amount to be paid ${getPrice()}</h4></div>
+  <p>Click <Link to = '/conversion'>here</Link> to pay in different currency</p>
       <Elements stripe={stripePromise}>
         <SplitForm />
       </Elements>
