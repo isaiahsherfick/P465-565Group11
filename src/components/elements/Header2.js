@@ -25,13 +25,14 @@ export default class Header2 extends React.Component{
                 <li>
 
                 <a href='#' data-item='Flights'  onClick={e => {this.showModal(e); }}  >Flights</a>
-                <div className="features-tiles-item-image mb-16">
+                {/*                <div className="features-tiles-item-image mb-16">
                     <Image
                       src={require('./../../assets/images/flight.png')}
                       alt="Features tile icon 02"
                       width={64}
                       height={64} />
-                  </div>
+                  </div>  */}
+
                 </li>
                 <li><Link to="./hotels"><a href='#' data-item='Hotels'>Hotels</a></Link></li>
                 <li><Link to="./attractions"><a href='#' data-item='Thingstodo'>Things to do</a></Link></li>
