@@ -17,6 +17,7 @@
 
 .nav1 a:hover{
     color: darkgray
+    /* color: #6163FF */
 }
 
 
@@ -26,7 +27,8 @@
     width: 100%;
     top: -25px;
     z-index: 1;
-    background-color: gray;
+    /* background-color: gray; */
+    background-color: #5B2765;
     padding: 15px;
     left: -26px;
 }
