@@ -23,7 +23,7 @@ const myData =  [
 
 
 
-function Itinerary() {
+function Itinerary(props) {
 
  const [myData, setMyData] =  useState([])
  const [myComment, setMyComment] = useState([])
@@ -66,13 +66,21 @@ const handleDelete =(name) => {
 setMyData(myData.filter(data => data !== name))
 }
 
-const renderData = (
+const reviewHandler = (data)=>{
+  props.history.push({
+    pathname: '/reviews',
+    data
+  })
+  }
+  
+  const renderData = (
  
    <div>
     {myData.map((data) => (
       <div key={data}>
          <p> {data}</p>
           <button onClick={() => handleDelete(data)}>delete </button>
+          <button /*className="whitetb"*/ onClick={()=>reviewHandler(data)}>Reviews</button>
         </div>
     ))}
   <p>Here's what others think about your itinerary</p>
