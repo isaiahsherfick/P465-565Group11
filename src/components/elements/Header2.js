@@ -37,6 +37,7 @@ export default class Header2 extends React.Component{
                 <li><Link to="./attractions"><a href='#' data-item='Thingstodo'>Things to do</a></Link></li>
                 <li><Link to='./restaurants'><a href='#' data-item='Restaurants'>Restaurants</a></Link></li>
                 <li><Link to="./popular"><a href='#' data-item='PopularPlaces'>Popular Places</a></Link></li>
+                <li><Link to="./mynetwork"><a href='#' data-item='Chat'>Chat</a></Link></li>
             </ul>
             </nav>
             <div >
