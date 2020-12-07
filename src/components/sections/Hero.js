@@ -74,7 +74,7 @@ const Hero = ({
                 <Link to="/login">
                 <ButtonGroup>
                   <Button tag="a" color="primary" wideMobile href="#">
-                    Search
+                    Search for your next destination today!
                     </Button>
 
                 </ButtonGroup>
