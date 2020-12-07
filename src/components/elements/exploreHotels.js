@@ -19,7 +19,7 @@ const Explore = () => {
 
              let placeId = "" 
              const addJson = (myData) => {
-                 
+
                  placeId = myData.place_id;
                 fetch("https://roadmappr.herokuapp.com/addToItinerary", {
                     method: "POST",
@@ -73,12 +73,14 @@ console.log(photo_reference_goes_here, "<== city data" )
 
    
     return (
-        
-       <div style={{marginTop:"20%"}}>
-           <Header/>
+        <div>
+            <Header/>
            <Header2 /> 
+        
+       <div >
+
            {renderData}
-           hello
+       </div>
        </div>
     )
 }

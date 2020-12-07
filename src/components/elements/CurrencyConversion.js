@@ -1,10 +1,15 @@
 import React, {useState, useEffect} from 'react'
+import Header from './Header'
+
+import { Link } from 'react-router-dom';
 
 class CurrencyConversion extends React.Component {
   
     render() {
       return (
+          <div>
 
+        <Header/>
         <div class="main ui text container">
   
    <div class="ui dividing centered header"> 
@@ -18,9 +23,16 @@ class CurrencyConversion extends React.Component {
   
    {/* <div id="app" </div> */}
    <CurrencyConverter/>
+   <Link to='/book'>
 
+   <button type="submit">
+        Pay
+      </button>
+   </Link>
 
 </div>
+</div>
+
       )  
     }  
   }

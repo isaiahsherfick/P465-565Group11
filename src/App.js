@@ -72,7 +72,6 @@ const App = () => {
           <Route exact path="/reviews" component={Reviews}/>
           <Route exact path="/viewreviews" component={ViewReviews}/>
           <Route exact path="/conversion" component={CurrencyConversion}/>
-
         </Switch>
       )} />
   );

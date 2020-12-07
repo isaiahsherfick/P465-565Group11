@@ -90,22 +90,36 @@ const MapLoader = withScriptjs(IMap);
 
 
   return (
-    <div className="container">
+    <div>
       <Header />
       <Header2 />
       <h1> Welcome to your Itinerary, {getUsername()} </h1>
 
-{myData.length < 1 ? <p>oops! no itinerary </p> : renderData}
-      {/* <IMap /> */}
-      <MapLoader
+    <div style={{display:"flex"},{flexDirection:"row"}}>
+            <MapLoader
       googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyCqflolF2b4aNNcyQs0XdbcoAFwtby7Muw"
       loadingElement={<div style={{ height: `100%` }} />}
   />
-    <div>Finalize your Itinerary by booking <Link to="/book">here</Link></div>
-    <div>Comment on other itineraries by clicking <Link to="/comment">here</Link></div>
+      {/* <div className="container" > */}
+
+
+{myData.length < 1 ? <p>oops! no itinerary </p> : renderData}
+{/* </div> */}
+
+
+    <div>Finalize your Itinerary by booking here  
+      <Link to='/book'><button type="submit">Book</button>
+</Link>
+</div>
+<br/>
+    <div>Comment on other itineraries here <Link to='/book'>
+      <button type="submit">Comment</button>
+</Link></div>
 
    
     </div>
+    </div>
+
   )
 
 }

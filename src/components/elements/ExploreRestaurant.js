@@ -85,11 +85,10 @@ console.log(photo_reference_goes_here, "<== city data" )
    
     return (
         
-       <div style={{marginTop:"20%"}}>
+       <div >
            <Header/>
            <Header2 /> 
            {renderData}
-           hello
        </div>
     )
 }
