@@ -52,12 +52,13 @@ function Places() {
 
 const renderData = myData.map(result => (
                      
-  <div style={{background: "lightBlue"}} > 
-  {console.log(result.result.name)}
-  <img style={{display:"unset"}} src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${result.result.photos[0].photo_reference}&key=AIzaSyANxvSPyPXr2rMPMSUjCqvBQ6_PS2cOs3Q`}/>
+  <div /*style={{background: "lightBlue"}}*/ > 
+  {/* {console.log(result.result.name)} */}
+  {result.result.photos &&
+  <img style={{display:"unset"}} src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${result.result.photos[0].photo_reference}&key=AIzaSyANxvSPyPXr2rMPMSUjCqvBQ6_PS2cOs3Q`}/>}
 
-      <p>{result.result.name} </p>
-      <p>{result.result.rating}</p>
+{result.result.name && <p>{result.result.name} </p> }
+      {/* <p>{result.result.rating}</p> */}
       <p>{result.result.vicinity}</p>
 
       {/* <p onClick={() => addJson(result)}> <a href={"#"}>Add to Itinerary</a> </p> */}
@@ -70,11 +71,14 @@ const renderData = myData.map(result => (
 
 
   return (
-    <div className="container">
+    <div /*className="container"*/>
       <Header />
       <Header2 />
       <h1> Hey {getUsername()}, checkout some popular places suggested by RoadMappr </h1>
-        {renderData}
+      <div class='flex-container'>
+      {renderData}
+
+      </div>
 {/* {myData.length < 1 ? <p>oops! no itinerary </p> : renderData} */}
 
 

@@ -107,7 +107,7 @@ const renderData = (
 
 
   return (
-    <div className="container">
+    <div /*className="container"*/>
         <Header/>
       <Header2 />
       {/* <h1> Welcome to your Itinerary, {getUsername()} </h1> */}

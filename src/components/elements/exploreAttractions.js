@@ -9,7 +9,7 @@ import './Explore.css'
 
 
 
-const Explore = () => {
+const Explore = (props) => {
 
     const cityData = getExploreData()
 
@@ -49,6 +49,13 @@ const Explore = () => {
         
 console.log(photo_reference_goes_here, "<== city data" )
 
+const navigate = (data) => {
+    props.history.push({
+        pathname: '/viewreviews',
+        data
+      })
+ }
+
              
              
              const renderData = 
@@ -63,6 +70,8 @@ console.log(photo_reference_goes_here, "<== city data" )
                 
                          {/* <p onClick={() => addJson(result)}> <a href={"#"}>Add to Itinerary</a> </p> */}
                          <p><button onClick={() => addJson(result)}>Add to Itinerary</button></p>
+                         <p><button onClick={() => console.log(result.place_id)}>Print Place</button></p>
+                         <p onClick={() => navigate(result.name)}> <a href={"#"}>View Reviews</a> </p>
                         
                          {/* <img src={str1} /> */}
                          {/* <img src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&amp;photoreference=${result.photos[0].photo_reference}&amp;key=AIzaSyCqflolF2b4aNNcyQs0XdbcoAFwtby7Muw`}/> */}

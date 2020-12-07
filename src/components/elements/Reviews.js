@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { withRouter } from 'react-router-dom';
 import Rating from '@material-ui/lab/Rating';
 import Typography from '@material-ui/core/Typography';
@@ -11,8 +11,7 @@ function Reviews(props) {
 
   const {data} = props.location;
 
-  console.log("DATA IN REVIEW", data)
-
+ 
 
   const [value, setValue] = React.useState(2);
   const [review, setReview] = useState({reviewTitle: "", reviewBody: "", reviewRating: value})
@@ -30,9 +29,11 @@ function Reviews(props) {
     setReview({...review, [e.target.name]: e.target.value})
     }
 
+
+
     const handleSubmit = e => {
         e.preventDefault();
-        console.log(review)
+        console.log(data)
         fetch("https://roadmappr.herokuapp.com/postReview", {
             method: "POST",
             headers:{
@@ -41,7 +42,7 @@ function Reviews(props) {
             },
             body:JSON.stringify({
                owner_id: 3,
-               unique_location_key: data.placeId,
+               unique_location_key: data,
                stars_out_of_five: review.reviewRating,
                review_header: review.reviewTitle,
                review_body: review.reviewBody,
@@ -50,7 +51,12 @@ function Reviews(props) {
             })
         })
         .then(res => res.json())
-        .then(res => console.log("success!", res))
+        .then(res => {
+          props.history.push({
+            pathname: '/viewreviews',
+            data
+          })
+        })
         .catch(err => console.log(err))
     }
 
@@ -59,21 +65,23 @@ function Reviews(props) {
     <div>
      
        
+      
+      <form onSubmit={handleSubmit} className="reviewForm" >
       <Box style={{allign: styles.allign}} component="fieldset" mb={3} borderColor="transparent">
-        <Typography className="typography" component="legend">Controlled</Typography>
+        <Typography className="typography" component="legend">Reviews</Typography>
         <Rating
           name="simple-controlled"
           value={value}
           onChange={(event, newValue) => {
             setValue(newValue);
             
-            console.log(newValue)
+
           }}
         />
       </Box>
 
-      <form onSubmit={handleSubmit} className="reviewForm" >
-       <input onChange={handleChange} name="reviewTitle" type="text" placeholder="Review Title"/>
+       <input onChange={handleChange} name
+       ="reviewTitle" type="text" placeholder="Review Title"/>
        <input onChange={handleChange}  name="reviewBody"   type="text" placeholder="Review body"/>
        <button>submit</button>
        </form>
