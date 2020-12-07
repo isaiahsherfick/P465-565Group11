@@ -59,7 +59,9 @@ const Flight = () => {
                          <p>${result.price}</p>
                          <p>{result.departureDate}</p>
                 
-                         <p onClick={() => addJson(result)}> <a href={"#"}>Add to Itinerary</a> </p>
+                         {/* <p onClick={() => addJson(result)}> <a href={"#"}>Add to Itinerary</a> </p> */}
+                         <p><button onClick={() => addJson(result)}>Add to Itinerary</button></p>
+
         {/* <img style={{display:"unset"}} src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${result.photos[0].photo_reference}&key=AIzaSyANxvSPyPXr2rMPMSUjCqvBQ6_PS2cOs3Q`}/> */}
                          {/* <img src={str1} /> */}
                          {/* <img src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&amp;photoreference=${result.photos[0].photo_reference}&amp;key=AIzaSyCqflolF2b4aNNcyQs0XdbcoAFwtby7Muw`}/> */}
@@ -73,10 +75,13 @@ const Flight = () => {
    
     return (
         
-       <div style={{marginTop:"20%"}}>
+       <div >
            <Header/>
            <Header2 /> 
-           {renderData}
+           <div class='flex-container'>
+             {renderData}
+
+           </div>
        </div>
     )
 }

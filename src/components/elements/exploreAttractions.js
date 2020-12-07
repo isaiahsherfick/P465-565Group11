@@ -12,7 +12,6 @@ import './Explore.css'
 const Explore = () => {
 
     const cityData = getExploreData()
-    
 
 
              const [myData, setMyData] = useState(cityData.attractions)
@@ -54,15 +53,17 @@ console.log(photo_reference_goes_here, "<== city data" )
              
              const renderData = 
                  myData.results.map(result => (
-                     <div style={{background: "lightBlue"}} > 
+                     <div   > 
                         {/* {console.log('attractions', result.photos[0])} */}
+                        {result.photos &&
+        <img style={{display:"unset"}} src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${result.photos[0].photo_reference}&key=AIzaSyANxvSPyPXr2rMPMSUjCqvBQ6_PS2cOs3Q`}/>}
                          <p>{result.name} </p>
-                         <p>{result.rating}</p>
+                         <p>Rating : {result.rating}</p>
                          <p>{result.vicinity}</p>
                 
-                         <p onClick={() => addJson(result)}> <a href={"#"}>Add to Itinerary</a> </p>
-                         {result.photos &&
-        <img style={{display:"unset"}} src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${result.photos[0].photo_reference}&key=AIzaSyANxvSPyPXr2rMPMSUjCqvBQ6_PS2cOs3Q`}/>}
+                         {/* <p onClick={() => addJson(result)}> <a href={"#"}>Add to Itinerary</a> </p> */}
+                         <p><button onClick={() => addJson(result)}>Add to Itinerary</button></p>
+                        
                          {/* <img src={str1} /> */}
                          {/* <img src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&amp;photoreference=${result.photos[0].photo_reference}&amp;key=AIzaSyCqflolF2b4aNNcyQs0XdbcoAFwtby7Muw`}/> */}
                          </div>
@@ -77,7 +78,7 @@ console.log(photo_reference_goes_here, "<== city data" )
         <div>
                        <Header/>
            <Header2 /> 
-       <div >
+       <div class='flex-container'>
 
            {renderData}
        </div>

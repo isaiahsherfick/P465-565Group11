@@ -52,13 +52,15 @@ nav {
   margin: 25px;
   background: #f9f9f9;
   padding: 16px;
+  // position: absolute;
+
   .menuItems {
     list-style: none;
     display: flex;
     padding-left: 0px;
 
     li {
-      margin: 50px;
+      margin: 50px 40px 0px 40px;
       // padding-left: 10px;
       a {
         text-decoration: none;
@@ -119,3 +121,4 @@ footer {
 #heroImage {
   width: 250px;
 }
+

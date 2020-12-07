@@ -56,14 +56,18 @@ export default class Modal extends React.Component {
       return null;
     }
     return (
-      <div class="flightmodal" id="flightmodal">
+      <div class= "modalblurContainer">
+      <div class="flightmodal ">
         <h3 style={{color:"black"}}>Flight Details</h3>
         <div class="flightcontent">
 
         <form onSubmit={ this.handleSubmit }>
-          <div className="form-group">
+          {/* <div className="form-group"> */}
+          <div>
+
           <label>Start City: </label>
           <PlacesAutocomplete/>
+          <br></br>
             <label>Select Date: </label>
             <DatePicker
               selected={ this.state.startDate }
@@ -72,7 +76,10 @@ export default class Modal extends React.Component {
               //dateFormat="yyyy-mm-dd"
             />
           </div>
-          <div className="form-group">
+          <br></br>
+
+          {/* <div className="form-group"> */}
+          <div >
             <button className="btn btn-success">Search</button>
           </div>
         </form>
@@ -86,6 +93,7 @@ export default class Modal extends React.Component {
             close
           </button>
         </div>
+      </div>
       </div>
     );
   }

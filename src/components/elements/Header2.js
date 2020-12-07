@@ -24,7 +24,7 @@ export default class Header2 extends React.Component{
             <ul class="menuItems">
                 <li>
 
-                <a href='#' data-item='Flights'  onClick={e => {this.showModal(e);}}>Flights</a>
+                <a href='#' data-item='Flights'  onClick={e => {this.showModal(e); }}  >Flights</a>
                 <div className="features-tiles-item-image mb-16">
                     <Image
                       src={require('./../../assets/images/flight.png')}
@@ -39,8 +39,10 @@ export default class Header2 extends React.Component{
                 <li><Link to="./popular"><a href='#' data-item='PopularPlaces'>Popular Places</a></Link></li>
             </ul>
             </nav>
+            <div >
             <Modal onClose={this.showModal} show={this.state.show}>
             </Modal>
+            </div>
             </div>
 
 
