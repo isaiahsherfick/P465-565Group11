@@ -103,6 +103,7 @@
     outline: 0;
     border-radius: 4px;
     background: white;
+    align-content: center;
   }
   
   input::placeholder {
@@ -125,5 +126,9 @@
   
   .StripeElement.PaymentRequestButton {
     height: 40px;
+  }
+
+  .stripes{
+    justify-content: center;
   }
   

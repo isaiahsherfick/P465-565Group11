@@ -6,6 +6,7 @@ import {
   CardCvcElement,
   CardExpiryElement
 } from "@stripe/react-stripe-js";
+import "./payment.css";
 
 import useResponsiveFontSize from "../../helpers/useResponsiveFontSize";
 
@@ -70,6 +71,7 @@ const SplitForm = () => {
     <form style ={{marginTop:"10px"}} onSubmit={handleSubmit}>
       <label>
         Card number
+        <div class="stripes">
         <CardNumberElement
           options={options}
           onReady={() => {
@@ -85,6 +87,7 @@ const SplitForm = () => {
             console.log("CardNumberElement [focus]");
           }}
         />
+        </div>
       </label>
       <label>
         Expiration date
