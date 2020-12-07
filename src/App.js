@@ -26,6 +26,8 @@ import PopularPlaces from "./components/elements/popularPlaces";
 import Reviews from "./components/elements/Reviews.js";
 import ViewReviews from './components/elements/ViewReviews';
 import CurrencyConversion from './components/elements/CurrencyConversion';
+import MyNetwork from './components/myNetwork';	
+import Messaging from './components/Messaging';
 
 
 // Initialize Google Analytics
@@ -72,6 +74,8 @@ const App = () => {
           <Route exact path="/reviews" component={Reviews}/>
           <Route exact path="/viewreviews" component={ViewReviews}/>
           <Route exact path="/conversion" component={CurrencyConversion}/>
+          <Route path="/mynetwork" component={MyNetwork}/>	
+            <Route path="/messaging" component={Messaging}/>	
         </Switch>
       )} />
   );
