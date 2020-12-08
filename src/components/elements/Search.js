@@ -10,11 +10,11 @@ class Search extends Component {
 
 		return(
 
-			<div style={{ margin: '100px' }}>
+			<div class="alldiv" style={{ margin: '100px' }}>
 				<div >
 				<Header/>
 				</div>
-				<h3 style={{alignContent:"center"}}>Welcome {getUsername()}, Search for your next destination!</h3>
+				<h2 style={{alignContent:"center"}}>Welcome {getUsername()}, Search for your next destination!</h2>
 				<div>
 				<Map
 					google={this.props.google}

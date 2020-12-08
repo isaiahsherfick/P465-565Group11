@@ -71,7 +71,7 @@ const renderData = myData.map(result => (
 
 
   return (
-    <div /*className="container"*/>
+    <div class="alldiv"/*className="container"*/>
       <Header />
       <Header2 />
       <h1> Hey {getUsername()}, checkout some popular places suggested by RoadMappr </h1>

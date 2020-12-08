@@ -99,7 +99,7 @@ const MapLoader = withScriptjs(IMap);
 
 
   return (
-    <div>
+    <div class="alldiv">
       <Header />
       <Header2 />
       <h1> Welcome to your Itinerary, {getUsername()} </h1>

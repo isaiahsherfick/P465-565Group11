@@ -5,6 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import './Reviews.css'
 import { getUserId } from '../../helpers/common';
+import Header from './Header'
 
 
 function Reviews(props) {
@@ -62,15 +63,16 @@ function Reviews(props) {
 
 
   return (
-    <div>
+    <div class="alldiv">
      
-       
+       <Header/>
       
       <form onSubmit={handleSubmit} className="reviewForm" >
       <Box style={{allign: styles.allign}} component="fieldset" mb={3} borderColor="transparent">
         <Typography className="typography" component="legend">Reviews</Typography>
         <Rating
           name="simple-controlled"
+          style={{color:"none"}}
           value={value}
           onChange={(event, newValue) => {
             setValue(newValue);

@@ -30,7 +30,7 @@ const stripePromise = loadStripe("pk_test_6pRNASCoBOKtIshFeQd4XMUh");
 
 const Payment = () => {
   return (
-      <div>
+      <div class="alldiv">
 
       <Header/>
       <div><h4 style={{marginTop:'100px'}}>Hi {getUsername()}, enter your card details below to confirm your bookings.<br/>

@@ -85,7 +85,7 @@ const navigate = (data) => {
 
    
     return (
-        <div>
+        <div class="alldiv">
             <Header/>
            <Header2 /> 
         

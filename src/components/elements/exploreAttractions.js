@@ -83,7 +83,7 @@ const navigate = (data) => {
 
    
     return (
-        <div>
+        <div class="alldiv">
                        <Header/>
            <Header2 /> 
        <div class='flex-container'>

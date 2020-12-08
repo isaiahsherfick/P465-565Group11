@@ -77,7 +77,7 @@ setMyData(myData.filter(data => data !== name))
 
 const renderData = (
  
-   <div>
+   <div class="alldiv">
     {myData.map((data) => (
       <div key={data}>
          {/* <p> UserID : {data.owner_id}</p> */}
@@ -107,7 +107,7 @@ const renderData = (
 
 
   return (
-    <div /*className="container"*/>
+    <div class="alldiv"/*className="container"*/>
         <Header/>
       <Header2 />
       {/* <h1> Welcome to your Itinerary, {getUsername()} </h1> */}

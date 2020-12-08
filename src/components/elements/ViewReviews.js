@@ -54,7 +54,7 @@ const displayReviews =  reviews && myData.map((item, index) => (
 
  
     return (
-        <div>
+        <div class="alldiv">
           <Header/>
           <Header2 />
 

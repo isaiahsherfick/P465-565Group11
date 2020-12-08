@@ -39,7 +39,7 @@ export default class Explore extends React.Component{
         require("./Explore.css")
    
         return (
-            <div style={{marginTop: "2%"}}>
+            <div class="alldiv" style={{marginTop: "2%"}}>
                 <Header/>
                 <Header2 />
                 <h1 id="city">{cityname}</h1>

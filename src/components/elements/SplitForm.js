@@ -71,7 +71,7 @@ const SplitForm = () => {
     <form style ={{marginTop:"10px"}} onSubmit={handleSubmit}>
       <label>
         Card number
-        <div class="stripes">
+        <div class="stripes alldiv">
         <CardNumberElement
           options={options}
           onReady={() => {
