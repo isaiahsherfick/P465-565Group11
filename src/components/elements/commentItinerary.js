@@ -53,7 +53,7 @@ function Itinerarycomment() {
     .catch(err => console.log(err))
   }, [])
   
-  console.log(typeof myData)
+  console.log('comment', myData)
   console.log(show)
   //https://roadmappr.herokuapp.com/removeFromItinerary
 const handleDelete =(name) => {
@@ -82,10 +82,10 @@ const renderData = (
       <div key={data}>
          {/* <p> UserID : {data.owner_id}</p> */}
          <p>Itinerary of {data.owner_id} is as follows :</p>
-         {data.tasks.map((task) => (<p> {task}</p>))}
+         {data.tasks && data.tasks.map((task) => (<p> {task}</p>))}
          <p>Here is what other users commented</p>
          {/* <p> {data.comments}</p> */}
-         {data.comments.map((comment) => (<p> {comment}</p>))}
+         {data.comments && data.comments.map((comment) => (<p> {comment}</p>))}
 
           {/* <button onClick={()=> showModal(show)}>Add Comment</button> */}
           {!show && <button onClick={openModal}>Add Comment</button>}
