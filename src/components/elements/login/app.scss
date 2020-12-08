@@ -25,15 +25,16 @@
 // * {
 //   box-sizing: border-box;
 // }
-#login html, h2 {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font-size: 100%;
-  font: inherit;
-  vertical-align: baseline;
-  margin-top: 0px;
-}
+/*-----commentingfor heroku------*/
+// #login html, h2 {
+//   margin: 0;
+//   padding: 0;
+//   border: 0;
+//   font-size: 100%;
+//   font: inherit;
+//   vertical-align: baseline;
+//   margin-top: 0px;
+// }
 .app-layout {
   max-width: 1000px;
   margin: 0 auto;
