@@ -3,7 +3,10 @@ import Header from "./Header";
 import React, {useState} from 'react';
 import { getExploreData } from '../../helpers/common';
 import { getCityData } from '../../helpers/common';
-//import './Explore.css'
+import { Link } from 'react-router-dom';
+
+
+// import './Explore.css'
 
 //const Explore = () => {
 export default class Explore extends React.Component{
@@ -40,9 +43,34 @@ export default class Explore extends React.Component{
                 <Header/>
                 <Header2 />
                 <h1 id="city">{cityname}</h1>
-       {
+       {/* {
         this.cityData.images.map(image => ( <img className="heroImage" style={{display:"inline-grid"}} src={image} alt="test image"></img>))
-       }
+
+       } */}
+       <div class='flex-container'>
+<div>
+<img style={{display:"unset"}} src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${cityData.attractions.results[0].photos[0].photo_reference}&key=AIzaSyANxvSPyPXr2rMPMSUjCqvBQ6_PS2cOs3Q`}/>
+<p><Link to="./attractions"><a href='#' data-item='Hotels'>Explore City Attractions</a></Link></p>
+</div>
+<div>
+<img style={{display:"unset"}} src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${cityData.hotels.results[0].photos[0].photo_reference}&key=AIzaSyANxvSPyPXr2rMPMSUjCqvBQ6_PS2cOs3Q`}/>
+
+    <p>
+    <Link to="./hotels"><a href='#' data-item='Hotels'>Explore Hotels</a></Link>
+
+    </p>
+</div>
+<div>
+<img style={{display:"unset"}} src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${cityData.restaurants.results[0].photos[0].photo_reference}&key=AIzaSyANxvSPyPXr2rMPMSUjCqvBQ6_PS2cOs3Q`}/>
+
+    <p>
+    <Link to="./restaurants"><a href='#' data-item='Hotels'>Explore Restaurants</a></Link>
+
+    </p>
+</div>
+
+</div>
+
                
             </div>
         );

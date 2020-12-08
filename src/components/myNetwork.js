@@ -3,7 +3,9 @@ import React, { Component } from 'react';
 import { dummyUsers } from "./Users";
 import Talk from "talkjs";
 import { getUsername } from '../helpers/common';
-
+import './chat.css'
+// import Header from './layout/Header';
+import Header from './elements/Header'
 
 class MyNetwork extends Component {
 
@@ -55,6 +57,8 @@ class MyNetwork extends Component {
         const currentUser = this.state;
 console.log("username ===>", getUsername());
         return (
+            <div>
+                <Header/>
             <div className="users">
                 <div className="current-user-container">
                     {currentUser &&
@@ -95,6 +99,7 @@ console.log("username ===>", getUsername());
                         <div id="talkjs-container" style={{height: "300px"}}><i></i></div>
                     </div>
                 </div>
+            </div>
             </div>
         )
     }

@@ -79,9 +79,9 @@ const reviewHandler = (data)=>{
     {myData.map((data) => (
       <div key={data}>
          <p> {data}</p>
-          <button onClick={() => handleDelete(data)}>delete </button>
+          <button onClick={() => handleDelete(data)}>Delete </button>
           <span> </span>
-          <button /*className="whitetb"*/ onClick={()=>reviewHandler(data)}>Reviews</button>
+          <button /*className="whitetb"*/ onClick={()=>reviewHandler(data)}>Write a review</button>
         </div>
     ))}
   <p>Here's what others think about your itinerary</p>
@@ -116,7 +116,8 @@ const MapLoader = withScriptjs(IMap);
       loadingElement={<div style={{ height: `100%` }} />}
   />
 
-
+</div>
+<br></br>
     <div>Finalize your Itinerary by booking here <Link to='/book'><button type="submit">Book</button>
 </Link>
 </div>
@@ -126,7 +127,6 @@ const MapLoader = withScriptjs(IMap);
 </Link></div>
 
    
-    </div>
     </div>
 
   )

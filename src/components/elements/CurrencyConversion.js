@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import Header from './Header'
-
+import './currency.css'
 import { Link } from 'react-router-dom';
 
 class CurrencyConversion extends React.Component {
@@ -10,14 +10,14 @@ class CurrencyConversion extends React.Component {
           <div>
 
         <Header/>
-        <div class="main ui text container">
+        <div class="main ui text container stylediv">
   
-   <div class="ui dividing centered header"> 
-     <h1>Currency Converter</h1>
-     <h2>
-       <i class="fa fa-dollar" style={{color: "#ffb3ba"}}></i>
-       <i class="fa fa-gbp" style={{color:"#bae1ff"}}></i>
-       <i class="fa fa-eur" style={{color:"#c6acc7"}}></i>
+   <div class="ui dividing centered header stylediv"> 
+     <h1 class='styleh1'>Currency Converter</h1>
+     <h2 class='styleh2'>
+       {/* <i class="fa fa-dollar stylei" style={{color: "#ffb3ba"}}></i>
+       <i class="fa fa-gbp stylei" style={{color:"#bae1ff"}}></i>
+       <i class="fa fa-eur stylei" style={{color:"#c6acc7wh"}}></i> */}
      </h2>
   </div>
   
@@ -42,8 +42,8 @@ class CurrencyConversion extends React.Component {
       super();
       
       this.state = {
-        baseCurrency:'GBP',
-        convertToCurrency:'USD',
+        baseCurrency:'USD',
+        convertToCurrency:'INR',
         baseAmount: 100,
         rates: [],
         currencies: []
@@ -107,28 +107,28 @@ class CurrencyConversion extends React.Component {
       
       
       return(
-        <div className="form-container">
-          <form className='ui mini form'>
+        <div className="styleform-container stylediv">
+          <form className='ui mini styleform'>
           
-           <h3>Convert from: {baseCurrency}</h3>
+           <p>Convert from: {baseCurrency}</p>
             <select  value={baseCurrency} onChange={this.changeBaseCurrency}>
               {currencyChoice}
               <option>{baseCurrency}</option>
             </select>
           
-            <h3>Convert to: {convertToCurrency}</h3>
+            <p>Convert to: {convertToCurrency}</p>
             <select value={convertToCurrency} onChange={this.changeConvertToCurrency}>
               {currencyChoice}
             </select>
           
-           <h3>Amount:</h3>
+           <p>Amount:</p>
              <input type='number' 
                     id='base-amount' 
                     defaultValue={baseAmount} 
                     onChange={this.changeBaseAmount}>
             </input>                             
          </form>                       
-         <h2 id='result-text'>{baseAmount} {baseCurrency} is equal to {result} {convertToCurrency}</h2>
+         <h4 id='result-text'>{baseAmount} {baseCurrency} is equal to {result} {convertToCurrency}</h4>
        </div>
       );
     }

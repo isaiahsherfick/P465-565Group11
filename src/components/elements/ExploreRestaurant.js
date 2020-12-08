@@ -74,7 +74,7 @@ const navigate = (data) => {
              const renderData = 
                  myData.results.map(result => (
                      
-                     <div style={{background: "lightBlue"}} > 
+                     <div /*style={{background: "white"}}*/ > 
                     <img style={{display:"unset"}} src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${result.photos[0].photo_reference}&key=AIzaSyANxvSPyPXr2rMPMSUjCqvBQ6_PS2cOs3Q`}/>
 
                          <p>{result.name} </p>

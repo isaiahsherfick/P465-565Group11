@@ -94,7 +94,7 @@ const renderData = (
             </Modal> */}
             {/* <Modal onClose={()=> showModal(show)} setShow>
             </Modal> */}
-            {/* <Modal closeModal={closeModal} show={show} /> */}
+            <Modal closeModal={closeModal} show={show} />
         </div>
     ))}
      

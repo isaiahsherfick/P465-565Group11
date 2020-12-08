@@ -70,7 +70,6 @@ const navigate = (data) => {
                 
                          {/* <p onClick={() => addJson(result)}> <a href={"#"}>Add to Itinerary</a> </p> */}
                          <p><button onClick={() => addJson(result)}>Add to Itinerary</button></p>
-                         <p><button onClick={() => console.log(result.place_id)}>Print Place</button></p>
                          <p onClick={() => navigate(result.name)}> <a href={"#"}>View Reviews</a> </p>
                         
                          {/* <img src={str1} /> */}

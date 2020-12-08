@@ -1,6 +1,8 @@
 
 import React, { Component, Fragment } from 'react';
 import Talk from "talkjs";
+import './chat.css'
+
 
 class Messaging extends Component {
 

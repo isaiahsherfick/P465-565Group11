@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Map from './Map';
 import Header from './HeaderSearch'
+import { getUsername } from '../../helpers/common';
+
 
 class Search extends Component {
 
@@ -12,13 +14,15 @@ class Search extends Component {
 				<div >
 				<Header/>
 				</div>
-				
+				<h2>Welcome {getUsername()}, Serach for your next destination</h2>
+				<div>
 				<Map
 					google={this.props.google}
 					center={{lat: 18.5204, lng: 73.8567}}
 					height='300px'
 					zoom={15}
 				/>
+				</div>
 				{/* console.log(getSearchData) */}
 			</div>
 		);
