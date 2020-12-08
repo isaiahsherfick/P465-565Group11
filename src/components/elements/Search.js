@@ -14,7 +14,7 @@ class Search extends Component {
 				<div >
 				<Header/>
 				</div>
-				<h2>Welcome {getUsername()}, Serach for your next destination</h2>
+				<h3 style={{alignContent:"center"}}>Welcome {getUsername()}, Search for your next destination!</h3>
 				<div>
 				<Map
 					google={this.props.google}
