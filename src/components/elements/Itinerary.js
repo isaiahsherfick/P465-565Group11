@@ -10,6 +10,7 @@ import { getExploreData } from '../../helpers/common';
 import { Link } from 'react-router-dom';
 import { getUserId } from '../../helpers/common';
 import { withScriptjs } from "react-google-maps";
+import Footer from './footer'
 
 import IMap from './ItineraryMap';
 
@@ -44,8 +45,8 @@ function Itinerary(props) {
     .catch(err => console.log(err))
   }, [])
   
-  console.log(typeof myData)
-
+  console.log('tasks',myData)
+  console.log('comments', myComment)
   //https://roadmappr.herokuapp.com/removeFromItinerary
 const handleDelete =(name) => {
   
@@ -74,8 +75,10 @@ const reviewHandler = (data)=>{
   }
   
   const renderData = (
- 
+   
    <div>
+      {  console.log('tasks',myData)}
+      {console.log('comments',myComment)}
     {myData.map((data) => (
       <div key={data}>
          <p> {data}</p>
@@ -127,8 +130,8 @@ const MapLoader = withScriptjs(IMap);
 </Link></div>
 
    
+    {/* <Footer/> */}
     </div>
-
   )
 
 }

@@ -22,7 +22,7 @@ const useOptions = () => {
           fontFamily: "Source Code Pro, monospace",
           "::placeholder": {
             color: "#aab7c4"
-          }
+          },
         },
         invalid: {
           color: "#9e2146"
@@ -69,9 +69,9 @@ const SplitForm = () => {
 
   return (
     <form style ={{marginTop:"10px"}} onSubmit={handleSubmit}>
-      <label>
+      <label style={{alignItems:'center'}}>
         Card number
-        <div class="stripes alldiv">
+        <div>
         <CardNumberElement
           options={options}
           onReady={() => {

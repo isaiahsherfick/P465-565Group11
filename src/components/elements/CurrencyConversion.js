@@ -7,13 +7,13 @@ class CurrencyConversion extends React.Component {
   
     render() {
       return (
-          <div>
+          <div class="alldiv">
 
         <Header/>
         <div class="main ui text container stylediv">
   
    <div class="ui dividing centered header stylediv"> 
-     <h1 class='styleh1'>Currency Converter</h1>
+     <h1 class='styleh1 '>Currency Converter</h1>
      <h2 class='styleh2'>
        {/* <i class="fa fa-dollar stylei" style={{color: "#ffb3ba"}}></i>
        <i class="fa fa-gbp stylei" style={{color:"#bae1ff"}}></i>
@@ -107,8 +107,8 @@ class CurrencyConversion extends React.Component {
       
       
       return(
-        <div className="styleform-container stylediv">
-          <form className='ui mini styleform'>
+        <div className="styleform-container stylediv alldiv">
+          <form className='ui mini styleform alldiv'>
           
            <p>Convert from: {baseCurrency}</p>
             <select  value={baseCurrency} onChange={this.changeBaseCurrency}>

@@ -92,7 +92,7 @@
   input,
   .StripeElement {
     display: block;
-    margin: 10px 0 20px 0;
+    margin: 10px 0 20px 30%;
     max-width: 500px;
     padding: 10px 14px;
     font-size: 1em;

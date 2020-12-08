@@ -26,6 +26,9 @@
 .typography {
     text-align: center;
 }
+.stars{
+    color:'#ffb400'
+}
 
 .reviewForm{
     display: flex;

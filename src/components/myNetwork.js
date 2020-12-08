@@ -14,7 +14,7 @@ class MyNetwork extends Component {
     email: "robertchandlerlucas@gmail.com",
     id: 8901,
     name: getUsername(),
-    photoUrl: "https://talkjs.com/docs/img/ronald.jpg",
+    // photoUrl: "https://talkjs.com/docs/img/ronald.jpg",
     role: "Member"
    }
 
@@ -67,7 +67,7 @@ console.log("username ===>", getUsername());
                                 <img alt={currentUser.name} src={currentUser.photoUrl} />
                             </picture>
                             <div className="current-user-info">
-                                <h3>{currentUser.name}</h3>
+                                <h3 style={{color:'gray'}}>{currentUser.name}</h3>
                                 <p>{currentUser.description}</p>
                             </div>
                         </div>
@@ -79,11 +79,11 @@ console.log("username ===>", getUsername());
                         { dummyUsers.map(user => 
                             <li key={user.id} className="user">
                                 <picture className="user-picture">
-                                    <img src={user.photoUrl} alt={`${user.name}`} />
+                                    {/* <img src={user.photoUrl} alt={`${user.name}`} /> */}
                                 </picture>
                                 <div className="user-info-container">
                                     <div className="user-info">
-                                        <h4>{user.name}</h4>
+                                        <h4 style={{color:'grey'}}>{user.name}</h4>
                                         <p>{user.info}</p>
                                     </div>
                                     <div className="user-action">

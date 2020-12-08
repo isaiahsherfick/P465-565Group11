@@ -70,9 +70,8 @@ function Reviews(props) {
       <form onSubmit={handleSubmit} className="reviewForm" >
       <Box style={{allign: styles.allign}} component="fieldset" mb={3} borderColor="transparent">
         <Typography className="typography" component="legend">Reviews</Typography>
-        <Rating
+        <Rating 
           name="simple-controlled"
-          style={{color:"none"}}
           value={value}
           onChange={(event, newValue) => {
             setValue(newValue);
