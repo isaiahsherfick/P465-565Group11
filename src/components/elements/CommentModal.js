@@ -11,7 +11,6 @@ import { setFlightData } from '../../helpers/common';
 import moment from 'moment';
 import axios from 'axios';
  
-import "react-datepicker/dist/react-datepicker.css";
 
 export default class Modal extends React.Component {
     constructor (props) {
@@ -43,8 +42,10 @@ export default class Modal extends React.Component {
             .then(res => {console.log(res.data); 			
               setFlightData(res.data);
               //this.props.history.push('/flights')
-              window.location = './flights'
+              // window.location = './comment'
             });
+            window.location = './comment'
+
       }
 
   onClose = e => {
@@ -60,41 +61,33 @@ export default class Modal extends React.Component {
     return (
       <div class= "modalblurContainer">
       <div class="flightmodal ">
-        <h3 style={{color:"black"}}>Flight Details</h3>
+        <h3 style={{color:"black"}}>Post a Comment</h3>
         <div class="flightcontent">
 
         <form onSubmit={ this.handleSubmit }>
           {/* <div className="form-group"> */}
           <div>
 
-          <label>Start City: </label>
-          <PlacesAutocomplete/>
+          <label>Comment: </label>
+          <input onChange={this.handleChange}  name="reviewBody"   type="text" placeholder="Comment"/>
+
           <br></br>
-            <label>Select Date: </label>
-            <DatePicker
-              selected={ this.state.startDate }
-              onChange={ this.handleChange }
-              name="startDate"
-              //dateFormat="yyyy-mm-dd"
-            />
+
           </div>
           <br></br>
 
           {/* <div className="form-group"> */}
           <div >
-            <button className="btn btn-success">Search</button>
+            <button className="btn btn-success">Post</button>
           </div>
         </form>
       
         </div>
-        <div class="flightactions">
-         {/* <div className="form-group">
-            <button className="btn btn-success">Add Date</button>
-          </div> */}
+        {/* <div class="flightactions">
           <button class="toggle-button" onClick={this.onClose}>
             close
           </button>
-        </div>
+        </div> */}
       </div>
       </div>
     );
